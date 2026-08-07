@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "566407914403",
+    "project_id": "versus-you-2v4ww9",
+    "storage_bucket": "versus-you-2v4ww9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566407914403:android:a94f675581b2e3c5dcb016",
+        "android_client_info": {
+          "package_name": "com.mycompany.versusyou"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcSujpNsDAOzlZUQfZ2QjFL6W3ajX53as"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
