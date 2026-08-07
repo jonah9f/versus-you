@@ -54,7 +54,8 @@
 	<true/>
 
 
-
+	<key>PermissionGroupNotification</key>
+    <string>Versus You uses notifications to send challenge reminders at the times you choose.</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
