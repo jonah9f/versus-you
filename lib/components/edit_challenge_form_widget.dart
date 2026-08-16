@@ -4,7 +4,9 @@ import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'edit_challenge_form_model.dart';
 export 'edit_challenge_form_model.dart';
@@ -36,11 +38,17 @@ class _EditChallengeFormWidgetState extends State<EditChallengeFormWidget> {
     super.initState();
     _model = createModel(context, () => EditChallengeFormModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.selectedReminderTime = widget.challengeToEdit?.reminderTime;
+      safeSetState(() {});
+    });
+
     _model.challengeNameFieldTextController ??=
         TextEditingController(text: widget.challengeToEdit?.name);
     _model.challengeNameFieldFocusNode ??= FocusNode();
 
-    _model.reminderSwitchValue = widget.challengeToEdit!.hasReminderTime();
+    _model.reminderSwitchValue = widget.challengeToEdit!.reminderEnabled;
   }
 
   @override
@@ -587,6 +595,11 @@ class _EditChallengeFormWidgetState extends State<EditChallengeFormWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    await actions.cancelChallengeReminders(
+                      widget.challengeToEdit!.notificationKey,
+                      widget.challengeToEdit!.repeatDays.toList(),
+                    );
+
                     await widget.challengeToEdit!.reference.update({
                       ...createChallengesRecordData(
                         name: _model.challengeNameFieldTextController.text,
@@ -594,6 +607,7 @@ class _EditChallengeFormWidgetState extends State<EditChallengeFormWidget> {
                         challengeType: _model.choiceChipsValue,
                         reminderTime: _model.datePicked,
                         isActive: true,
+                        reminderEnabled: _model.reminderSwitchValue,
                       ),
                       ...mapToFirestore(
                         {
@@ -601,6 +615,21 @@ class _EditChallengeFormWidgetState extends State<EditChallengeFormWidget> {
                         },
                       ),
                     });
+                    if (_model.reminderSwitchValue == true) {
+                      await actions.scheduleChallengeReminders(
+                        widget.challengeToEdit!.name,
+                        _model.selectedReminderTime!,
+                        _model.repeatDaysChoiceChipsValues!.toList(),
+                        widget.challengeToEdit!.notificationKey,
+                        widget.challengeToEdit!.challengeType,
+                      );
+                    } else {
+                      await actions.cancelChallengeReminders(
+                        widget.challengeToEdit!.notificationKey,
+                        _model.repeatDaysChoiceChipsValues!.toList(),
+                      );
+                    }
+
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

@@ -1,13 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/complete_challege_sheet_widget.dart';
 import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -33,6 +37,36 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.notificationChallengeRef =
+          await actions.initializeNotificationHandling();
+      if (_model.notificationChallengeRef != null) {
+        _model.notifcationChallenge = await ChallengesRecord.getDocumentOnce(
+            _model.notificationChallengeRef!);
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          enableDrag: false,
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: CompleteChallegeSheetWidget(
+                  challengeDoc: _model.notifcationChallenge!,
+                ),
+              ),
+            );
+          },
+        ).then((value) => safeSetState(() {}));
+
+        FFAppState().pendingChallengeId = '';
+        FFAppState().pendingChallengeRef = null;
+        safeSetState(() {});
+      }
       if (!functions.isSameDay(
           currentUserDocument?.lastDailyReset, getCurrentTimestamp)) {
         await currentUserReference!.update(createUsersRecordData(
@@ -60,6 +94,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -874,8 +910,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 20.0, 0.0, 20.0),
-                                          child: Icon(
-                                            Icons.check_box,
+                                          child: FaIcon(
+                                            FontAwesomeIcons.bullseye,
                                             color: Color(0xFF78E84C),
                                             size: 24.0,
                                           ),

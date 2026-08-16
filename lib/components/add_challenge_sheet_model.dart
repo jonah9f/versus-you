@@ -8,6 +8,8 @@ class AddChallengeSheetModel extends FlutterFlowModel<AddChallengeSheetWidget> {
 
   DateTime? selectedReminderTime;
 
+  String notificationKey = '\"\"';
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for ChoiceChips widget.

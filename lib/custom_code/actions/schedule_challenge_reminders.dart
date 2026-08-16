@@ -18,6 +18,7 @@ Future scheduleChallengeReminders(
   DateTime reminderTime,
   List<String> repeatDays,
   String challengeId,
+  String challengeType,
 ) async {
   final notificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -43,7 +44,33 @@ Future scheduleChallengeReminders(
     iOS: iosInitializationSettings,
   );
 
-  await notificationsPlugin.initialize(initializationSettings);
+  await notificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: (NotificationResponse response) async {
+      final payload = response.payload;
+
+      if (payload != null && payload.isNotEmpty) {
+        FFAppState().pendingChallengeId = payload;
+        FFAppState().pendingChallengeRef =
+            FirebaseFirestore.instance.collection('challenges').doc(payload);
+      }
+    },
+  );
+
+  final launchDetails =
+      await notificationsPlugin.getNotificationAppLaunchDetails();
+
+  if (launchDetails?.didNotificationLaunchApp ?? false) {
+    final payload = launchDetails?.notificationResponse?.payload;
+
+    print('NOTIFICATION LAUNCH payload=$payload');
+
+    if (payload != null && payload.isNotEmpty) {
+      FFAppState().pendingChallengeId = payload;
+      FFAppState().pendingChallengeRef =
+          FirebaseFirestore.instance.collection('challenges').doc(payload);
+    }
+  }
 
   print('REMINDER: notifications initialized');
 
@@ -116,12 +143,23 @@ Future scheduleChallengeReminders(
       'now=${tz.TZDateTime.now(tz.local)}',
     );
 
-    final notificationId = Object.hash(challengeId, weekday).abs() % 2147483647;
+    final notificationId = _stableNotificationId(challengeId, weekday);
+    print(
+      'REMINDER SCHEDULE ID | '
+      'challenge=$challengeId | '
+      'day=$dayName | '
+      'weekday=$weekday | '
+      'id=$notificationId',
+    );
+
+    final notificationBody = challengeType == 'Break a Habit'
+        ? 'Did you stay on track with: $challengeName?'
+        : 'Time to complete: $challengeName';
 
     await notificationsPlugin.zonedSchedule(
       notificationId,
       'Versus You',
-      'Time to complete: $challengeName',
+      notificationBody,
       scheduledDate,
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -162,4 +200,16 @@ tz.TZDateTime _nextWeekdayTime(
   }
 
   return scheduledDate;
+}
+
+int _stableNotificationId(String challengeId, int weekday) {
+  final input = '$challengeId-$weekday';
+
+  int hash = 0;
+
+  for (final codeUnit in input.codeUnits) {
+    hash = ((hash * 31) + codeUnit) & 0x7fffffff;
+  }
+
+  return hash;
 }

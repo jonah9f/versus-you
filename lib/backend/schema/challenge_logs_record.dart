@@ -60,6 +60,11 @@ class ChallengeLogsRecord extends FirestoreRecord {
   String get challengeName => _challengeName ?? '';
   bool hasChallengeName() => _challengeName != null;
 
+  // "slip_reason" field.
+  String? _slipReason;
+  String get slipReason => _slipReason ?? '';
+  bool hasSlipReason() => _slipReason != null;
+
   void _initializeFields() {
     _userRef = snapshotData['user_ref'] as DocumentReference?;
     _challengeRef = snapshotData['challenge_ref'] as DocumentReference?;
@@ -70,6 +75,7 @@ class ChallengeLogsRecord extends FirestoreRecord {
     _completedTime = snapshotData['completed_time'] as DateTime?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _challengeName = snapshotData['challenge_name'] as String?;
+    _slipReason = snapshotData['slip_reason'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createChallengeLogsRecordData({
   DateTime? completedTime,
   DateTime? createdTime,
   String? challengeName,
+  String? slipReason,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createChallengeLogsRecordData({
       'completed_time': completedTime,
       'created_time': createdTime,
       'challenge_name': challengeName,
+      'slip_reason': slipReason,
     }.withoutNulls,
   );
 
@@ -148,7 +156,8 @@ class ChallengeLogsRecordDocumentEquality
         e1?.xpEarned == e2?.xpEarned &&
         e1?.completedTime == e2?.completedTime &&
         e1?.createdTime == e2?.createdTime &&
-        e1?.challengeName == e2?.challengeName;
+        e1?.challengeName == e2?.challengeName &&
+        e1?.slipReason == e2?.slipReason;
   }
 
   @override
@@ -161,7 +170,8 @@ class ChallengeLogsRecordDocumentEquality
         e?.xpEarned,
         e?.completedTime,
         e?.createdTime,
-        e?.challengeName
+        e?.challengeName,
+        e?.slipReason
       ]);
 
   @override

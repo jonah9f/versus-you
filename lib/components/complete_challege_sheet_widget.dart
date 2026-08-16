@@ -1,7 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/slip_reason_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -137,16 +139,28 @@ class _CompleteChallegeSheetWidgetState
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    await ChallengeLogsRecord.collection
-                        .doc()
+                    var challengeLogsRecordReference =
+                        ChallengeLogsRecord.collection.doc();
+                    await challengeLogsRecordReference
                         .set(createChallengeLogsRecordData(
-                          challengeRef: widget.challengeDoc?.reference,
-                          challengeName: widget.challengeDoc?.name,
-                          userRef: currentUserReference,
-                          completed: false,
-                          completedTime: getCurrentTimestamp,
-                          xpEarned: 0,
-                        ));
+                      challengeRef: widget.challengeDoc?.reference,
+                      challengeName: widget.challengeDoc?.name,
+                      userRef: currentUserReference,
+                      completed: false,
+                      completedTime: getCurrentTimestamp,
+                      xpEarned: 0,
+                    ));
+                    _model.createdChallengeLog =
+                        ChallengeLogsRecord.getDocumentFromData(
+                            createChallengeLogsRecordData(
+                              challengeRef: widget.challengeDoc?.reference,
+                              challengeName: widget.challengeDoc?.name,
+                              userRef: currentUserReference,
+                              completed: false,
+                              completedTime: getCurrentTimestamp,
+                              xpEarned: 0,
+                            ),
+                            challengeLogsRecordReference);
 
                     await currentUserReference!.update({
                       ...mapToFirestore(
@@ -166,7 +180,49 @@ class _CompleteChallegeSheetWidgetState
                           valueOrDefault(
                               currentUserDocument?.todayAttempted, 0)),
                     ));
-                    Navigator.pop(context);
+                    if (widget.challengeDoc?.challengeType ==
+                        'Break a Habit') {
+                      Navigator.pop(context);
+
+                      await _model.createdChallengeLog!.challengeRef!
+                          .update(createChallengesRecordData(
+                        cleanStreak: 0,
+                      ));
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: SlipReasonSheetWidget(
+                              challengeLogRef:
+                                  _model.createdChallengeLog!.reference,
+                              challengeRef: widget.challengeDoc!.reference,
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    } else {
+                      Navigator.pop(context);
+                    }
+
+                    if (widget.challengeDoc?.challengeType ==
+                        'Build a Habit') {
+                      await actions.rescheduleBuildHabitReminder(
+                        widget.challengeDoc!.name,
+                        widget.challengeDoc!.reference,
+                        90,
+                      );
+                    }
+
+                    await widget.challengeDoc!.reference
+                        .update(createChallengesRecordData(
+                      completedToday: true,
+                    ));
+
+                    safeSetState(() {});
                   },
                   child: Container(
                     width: 120.0,
@@ -215,129 +271,135 @@ class _CompleteChallegeSheetWidgetState
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  final firestoreBatch = FirebaseFirestore.instance.batch();
-                  try {
-                    _model.existingLogs = await queryChallengeLogsRecordOnce(
-                      queryBuilder: (challengeLogsRecord) => challengeLogsRecord
-                          .where(
-                            'challenge_ref',
-                            isEqualTo: widget.challengeDoc?.reference,
-                          )
-                          .where(
-                            'user_ref',
-                            isEqualTo: currentUserReference,
-                          )
-                          .where(
-                            'completed',
-                            isEqualTo: true,
-                          )
-                          .where(
-                            'completed_time',
-                            isGreaterThanOrEqualTo:
-                                currentUserDocument?.todayStart,
-                          )
-                          .where(
-                            'completed_time',
-                            isLessThan: functions.startOfTomorrow(),
-                          ),
-                      limit: 1,
-                    );
-                    if (!(_model.existingLogs != null &&
-                        (_model.existingLogs)!.isNotEmpty)) {
-                      firestoreBatch.set(
-                          ChallengeLogsRecord.collection.doc(),
-                          createChallengeLogsRecordData(
-                            challengeRef: widget.challengeDoc?.reference,
-                            userRef: currentUserReference,
-                            challengeName: widget.challengeDoc?.name,
-                            completed: true,
-                            completedTime: getCurrentTimestamp,
-                            xpEarned: widget.challengeDoc?.xpReward,
-                          ));
-
-                      firestoreBatch.update(
-                          widget.challengeDoc!.reference,
-                          createChallengesRecordData(
-                            lastCompletedDate: getCurrentTimestamp,
-                            completedToday: true,
-                          ));
-
-                      firestoreBatch.update(currentUserReference!, {
-                        ...mapToFirestore(
-                          {
-                            'xp': FieldValue.increment(
-                                widget.challengeDoc!.xpReward),
-                            'total_xp': FieldValue.increment(
-                                widget.challengeDoc!.xpReward),
-                            'today_completed': FieldValue.increment(1),
-                            'challenges_completed': FieldValue.increment(1),
-                            'weekly_completed': FieldValue.increment(1),
-                            'monthly_challenges_completed':
-                                FieldValue.increment(1),
-                            'today_attempted': FieldValue.increment(1),
-                            'today_xp': FieldValue.increment(
-                                widget.challengeDoc!.xpReward),
-                          },
+                  _model.existingLogs = await queryChallengeLogsRecordOnce(
+                    queryBuilder: (challengeLogsRecord) => challengeLogsRecord
+                        .where(
+                          'challenge_ref',
+                          isEqualTo: widget.challengeDoc?.reference,
+                        )
+                        .where(
+                          'user_ref',
+                          isEqualTo: currentUserReference,
+                        )
+                        .where(
+                          'completed',
+                          isEqualTo: true,
+                        )
+                        .where(
+                          'completed_time',
+                          isGreaterThanOrEqualTo:
+                              currentUserDocument?.todayStart,
+                        )
+                        .where(
+                          'completed_time',
+                          isLessThan: functions.startOfTomorrow(),
                         ),
-                      });
+                    limit: 1,
+                  );
+                  if (!(_model.existingLogs != null &&
+                      (_model.existingLogs)!.isNotEmpty)) {
+                    await ChallengeLogsRecord.collection
+                        .doc()
+                        .set(createChallengeLogsRecordData(
+                          challengeRef: widget.challengeDoc?.reference,
+                          userRef: currentUserReference,
+                          challengeName: widget.challengeDoc?.name,
+                          completed: true,
+                          completedTime: getCurrentTimestamp,
+                          xpEarned: widget.challengeDoc?.xpReward,
+                        ));
 
-                      firestoreBatch.update(
-                          currentUserReference!,
-                          createUsersRecordData(
-                            mondayPerformance: (int completed, int attempted) {
-                              return attempted == 0
-                                  ? 0.0
-                                  : completed / attempted;
-                            }(
-                                valueOrDefault(
-                                    currentUserDocument?.todayCompleted, 0),
-                                valueOrDefault(
-                                    currentUserDocument?.todayAttempted, 0)),
-                          ));
-                    }
-                    if (!functions.isSameDay(
-                        currentUserDocument?.lastCompletionDate,
-                        getCurrentTimestamp)) {
-                      firestoreBatch.update(currentUserReference!, {
-                        ...createUsersRecordData(
-                          lastCompletionDate: getCurrentTimestamp,
-                        ),
-                        ...mapToFirestore(
-                          {
-                            'current_streak': FieldValue.increment(1),
-                          },
-                        ),
-                      });
-                      if (valueOrDefault(
-                              currentUserDocument?.currentStreak, 0) >=
-                          valueOrDefault(currentUserDocument?.bestStreak, 0)) {
-                        firestoreBatch.update(
-                            currentUserReference!,
-                            createUsersRecordData(
-                              bestStreak: valueOrDefault(
-                                  currentUserDocument?.currentStreak, 0),
-                            ));
-                      }
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Already completed today',
-                            style: GoogleFonts.manrope(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor: Color(0xFF78E84C),
-                        ),
-                      );
-                    }
+                    await widget.challengeDoc!.reference
+                        .update(createChallengesRecordData(
+                      lastCompletedDate: getCurrentTimestamp,
+                      completedToday: true,
+                    ));
 
-                    Navigator.pop(context);
-                  } finally {
-                    await firestoreBatch.commit();
+                    await currentUserReference!.update({
+                      ...mapToFirestore(
+                        {
+                          'xp': FieldValue.increment(
+                              widget.challengeDoc!.xpReward),
+                          'total_xp': FieldValue.increment(
+                              widget.challengeDoc!.xpReward),
+                          'today_completed': FieldValue.increment(1),
+                          'challenges_completed': FieldValue.increment(1),
+                          'weekly_completed': FieldValue.increment(1),
+                          'monthly_challenges_completed':
+                              FieldValue.increment(1),
+                          'today_attempted': FieldValue.increment(1),
+                          'today_xp': FieldValue.increment(
+                              widget.challengeDoc!.xpReward),
+                        },
+                      ),
+                    });
+
+                    await currentUserReference!.update(createUsersRecordData(
+                      mondayPerformance: (int completed, int attempted) {
+                        return attempted == 0 ? 0.0 : completed / attempted;
+                      }(
+                          valueOrDefault(
+                              currentUserDocument?.todayCompleted, 0),
+                          valueOrDefault(
+                              currentUserDocument?.todayAttempted, 0)),
+                    ));
                   }
+                  if (!functions.isSameDay(
+                      currentUserDocument?.lastCompletionDate,
+                      getCurrentTimestamp)) {
+                    await currentUserReference!.update({
+                      ...createUsersRecordData(
+                        lastCompletionDate: getCurrentTimestamp,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'current_streak': FieldValue.increment(1),
+                        },
+                      ),
+                    });
+                    if (valueOrDefault(currentUserDocument?.currentStreak, 0) >=
+                        valueOrDefault(currentUserDocument?.bestStreak, 0)) {
+                      await currentUserReference!.update(createUsersRecordData(
+                        bestStreak: valueOrDefault(
+                            currentUserDocument?.currentStreak, 0),
+                      ));
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Already completed today',
+                          style: GoogleFonts.manrope(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        duration: Duration(milliseconds: 4000),
+                        backgroundColor: Color(0xFF78E84C),
+                      ),
+                    );
+                  }
+
+                  if (widget.challengeDoc?.challengeType == 'Break a Habit') {
+                    await widget.challengeDoc!.reference.update({
+                      ...mapToFirestore(
+                        {
+                          'clean_streak': FieldValue.increment(1),
+                        },
+                      ),
+                    });
+                    _model.freshChallengeDoc =
+                        await ChallengesRecord.getDocumentOnce(
+                            widget.challengeDoc!.reference);
+                    if (_model.freshChallengeDoc!.cleanStreak >
+                        _model.freshChallengeDoc!.bestCleanStreak) {
+                      await widget.challengeDoc!.reference
+                          .update(createChallengesRecordData(
+                        bestCleanStreak: _model.freshChallengeDoc?.cleanStreak,
+                      ));
+                    }
+                  }
+                  Navigator.pop(context);
 
                   safeSetState(() {});
                 },

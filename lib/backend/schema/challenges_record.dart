@@ -106,6 +106,26 @@ class ChallengesRecord extends FirestoreRecord {
   bool get reminderEnabled => _reminderEnabled ?? false;
   bool hasReminderEnabled() => _reminderEnabled != null;
 
+  // "slip_count" field.
+  int? _slipCount;
+  int get slipCount => _slipCount ?? 0;
+  bool hasSlipCount() => _slipCount != null;
+
+  // "clean_streak" field.
+  int? _cleanStreak;
+  int get cleanStreak => _cleanStreak ?? 0;
+  bool hasCleanStreak() => _cleanStreak != null;
+
+  // "best_clean_streak" field.
+  int? _bestCleanStreak;
+  int get bestCleanStreak => _bestCleanStreak ?? 0;
+  bool hasBestCleanStreak() => _bestCleanStreak != null;
+
+  // "notification_key" field.
+  String? _notificationKey;
+  String get notificationKey => _notificationKey ?? '';
+  bool hasNotificationKey() => _notificationKey != null;
+
   void _initializeFields() {
     _userRef = snapshotData['user_ref'] as DocumentReference?;
     _name = snapshotData['name'] as String?;
@@ -125,6 +145,10 @@ class ChallengesRecord extends FirestoreRecord {
     _lastCompletedDate = snapshotData['last_completed_date'] as DateTime?;
     _completedToday = snapshotData['completed_today'] as bool?;
     _reminderEnabled = snapshotData['reminder_enabled'] as bool?;
+    _slipCount = castToType<int>(snapshotData['slip_count']);
+    _cleanStreak = castToType<int>(snapshotData['clean_streak']);
+    _bestCleanStreak = castToType<int>(snapshotData['best_clean_streak']);
+    _notificationKey = snapshotData['notification_key'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -179,6 +203,10 @@ Map<String, dynamic> createChallengesRecordData({
   DateTime? lastCompletedDate,
   bool? completedToday,
   bool? reminderEnabled,
+  int? slipCount,
+  int? cleanStreak,
+  int? bestCleanStreak,
+  String? notificationKey,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -199,6 +227,10 @@ Map<String, dynamic> createChallengesRecordData({
       'last_completed_date': lastCompletedDate,
       'completed_today': completedToday,
       'reminder_enabled': reminderEnabled,
+      'slip_count': slipCount,
+      'clean_streak': cleanStreak,
+      'best_clean_streak': bestCleanStreak,
+      'notification_key': notificationKey,
     }.withoutNulls,
   );
 
@@ -228,7 +260,11 @@ class ChallengesRecordDocumentEquality implements Equality<ChallengesRecord> {
         e1?.challengeType == e2?.challengeType &&
         e1?.lastCompletedDate == e2?.lastCompletedDate &&
         e1?.completedToday == e2?.completedToday &&
-        e1?.reminderEnabled == e2?.reminderEnabled;
+        e1?.reminderEnabled == e2?.reminderEnabled &&
+        e1?.slipCount == e2?.slipCount &&
+        e1?.cleanStreak == e2?.cleanStreak &&
+        e1?.bestCleanStreak == e2?.bestCleanStreak &&
+        e1?.notificationKey == e2?.notificationKey;
   }
 
   @override
@@ -250,7 +286,11 @@ class ChallengesRecordDocumentEquality implements Equality<ChallengesRecord> {
         e?.challengeType,
         e?.lastCompletedDate,
         e?.completedToday,
-        e?.reminderEnabled
+        e?.reminderEnabled,
+        e?.slipCount,
+        e?.cleanStreak,
+        e?.bestCleanStreak,
+        e?.notificationKey
       ]);
 
   @override

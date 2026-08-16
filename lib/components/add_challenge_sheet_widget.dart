@@ -573,6 +573,9 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    _model.notificationKey =
+                        '${currentUserUid} - ${getCurrentTimestamp.toString()}';
+                    safeSetState(() {});
                     if (_model.reminderSwitchValue!) {
                       await ChallengesRecord.collection.doc().set({
                         ...createChallengesRecordData(
@@ -586,6 +589,10 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                           challengeType: _model.choiceChipsValue,
                           completedToday: false,
                           reminderEnabled: true,
+                          cleanStreak: 0,
+                          bestCleanStreak: 0,
+                          slipCount: 0,
+                          notificationKey: _model.notificationKey,
                         ),
                         ...mapToFirestore(
                           {
@@ -605,6 +612,10 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                           challengeType: _model.choiceChipsValue,
                           completedToday: false,
                           reminderEnabled: false,
+                          slipCount: 0,
+                          cleanStreak: 0,
+                          bestCleanStreak: 0,
+                          notificationKey: _model.notificationKey,
                         ),
                         ...mapToFirestore(
                           {
@@ -619,37 +630,12 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                                 currentUserDocument?.notificationsEnabled,
                                 false) ==
                             true)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'repeat days: ${_model.datePicked?.toString()}',
-                            style: TextStyle(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
-                        ),
-                      );
                       await actions.scheduleChallengeReminders(
                         _model.challengeNameFieldTextController.text,
                         _model.datePicked!,
                         _model.repeatDaysChoiceChipsValues!.toList(),
-                        '${_model.challengeNameFieldTextController.text}${_model.selectedReminderTime?.toString()}',
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'notification action finis',
-                            style: TextStyle(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
-                        ),
+                        _model.notificationKey,
+                        _model.choiceChipsValue!,
                       );
                     }
 

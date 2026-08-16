@@ -8,6 +8,8 @@ class EditChallengeFormModel extends FlutterFlowModel<EditChallengeFormWidget> {
 
   DateTime? selectedReminderTime;
 
+  bool reminderTimeChanged = false;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for ChoiceChips widget.

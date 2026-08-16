@@ -2,6 +2,7 @@ import '/backend/backend.dart';
 import '/components/edit_challenge_form_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'edit_challenge_model.dart';
@@ -154,6 +155,10 @@ class _EditChallengeWidgetState extends State<EditChallengeWidget> {
                       ) ??
                       false;
                   if (confirmDialogResponse) {
+                    await actions.cancelChallengeReminders(
+                      widget.challengeDoc!.notificationKey,
+                      widget.challengeDoc!.repeatDays.toList(),
+                    );
                     await widget.challengeDoc!.reference.delete();
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
