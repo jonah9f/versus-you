@@ -25,3 +25,7 @@ export '/change_email_page/change_email_page_widget.dart'
 export '/change_password_page/change_password_page_widget.dart'
     show ChangePasswordPageWidget;
 export '/privacy_page/privacy_page_widget.dart' show PrivacyPageWidget;
+export '/onboarding1/onboarding1_widget.dart' show Onboarding1Widget;
+export '/onboarding2/onboarding2_widget.dart' show Onboarding2Widget;
+export '/onboarding3/onboarding3_widget.dart' show Onboarding3Widget;
+export '/onboarding4/onboarding4_widget.dart' show Onboarding4Widget;

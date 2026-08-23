@@ -183,6 +183,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: PrivacyPageWidget.routeName,
           path: PrivacyPageWidget.routePath,
           builder: (context, params) => PrivacyPageWidget(),
+        ),
+        FFRoute(
+          name: Onboarding1Widget.routeName,
+          path: Onboarding1Widget.routePath,
+          builder: (context, params) => Onboarding1Widget(),
+        ),
+        FFRoute(
+          name: Onboarding2Widget.routeName,
+          path: Onboarding2Widget.routePath,
+          builder: (context, params) => Onboarding2Widget(),
+        ),
+        FFRoute(
+          name: Onboarding3Widget.routeName,
+          path: Onboarding3Widget.routePath,
+          builder: (context, params) => Onboarding3Widget(),
+        ),
+        FFRoute(
+          name: Onboarding4Widget.routeName,
+          path: Onboarding4Widget.routePath,
+          builder: (context, params) => Onboarding4Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

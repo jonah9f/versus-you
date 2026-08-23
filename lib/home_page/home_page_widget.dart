@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,136 +39,148 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      unawaited(
-        () async {
-          await actions.scheduleDailyQuoteNotification();
-        }(),
-      );
-      unawaited(
-        () async {
-          await actions.scheduleDailyMotivationNotification();
-        }(),
-      );
-      await actions.scheduleMissedDayReminders();
-      _model.notificationChallengeRef =
-          await actions.initializeNotificationHandling(
-        context,
-      );
-      if (_model.notificationChallengeRef != null) {
-        _model.notifcationChallenge = await ChallengesRecord.getDocumentOnce(
-            _model.notificationChallengeRef!);
-        await showModalBottomSheet(
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          enableDrag: false,
-          context: context,
-          builder: (context) {
-            return GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-              child: Padding(
-                padding: MediaQuery.viewInsetsOf(context),
-                child: CompleteChallegeSheetCopyWidget(
-                  challengeDoc: _model.notifcationChallenge!,
+      if (valueOrDefault<bool>(
+              currentUserDocument?.hasCompletedOnboarding, false) ==
+          false) {
+        if (Navigator.of(context).canPop()) {
+          context.pop();
+        }
+        context.pushNamed(Onboarding1Widget.routeName);
+      } else {
+        unawaited(
+          () async {
+            await actions.scheduleDailyQuoteNotification();
+          }(),
+        );
+        unawaited(
+          () async {
+            await actions.scheduleDailyMotivationNotification();
+          }(),
+        );
+        await actions.scheduleMissedDayReminders();
+        _model.notificationChallengeRef =
+            await actions.initializeNotificationHandling(
+          context,
+        );
+        if (_model.notificationChallengeRef != null) {
+          _model.notifcationChallenge = await ChallengesRecord.getDocumentOnce(
+              _model.notificationChallengeRef!);
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            enableDrag: false,
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: CompleteChallegeSheetCopyWidget(
+                    challengeDoc: _model.notifcationChallenge!,
+                  ),
                 ),
-              ),
-            );
-          },
-        ).then((value) => safeSetState(() {}));
+              );
+            },
+          ).then((value) => safeSetState(() {}));
 
-        FFAppState().pendingChallengeId = '';
-        FFAppState().pendingChallengeRef = null;
-        safeSetState(() {});
-      }
-      if (functions.isNewWeekReset(
-              currentUserDocument?.lastWeeklyReset, getCurrentTimestamp) ==
-          true) {
-        await currentUserReference!.update(createUsersRecordData(
-          weeklyScoreChange: 0,
-          lastWeeklyReset: getCurrentTimestamp,
-          weeklyCompleted: 0,
-        ));
-      }
-      if (!functions.isSameDay(
-          currentUserDocument?.lastDailyReset, getCurrentTimestamp)) {
-        await currentUserReference!.update(createUsersRecordData(
-          yesterdayCompleted:
-              valueOrDefault(currentUserDocument?.todayCompleted, 0),
-          yesterdayCompletionPercentage: (int completed, int attempted) {
-            return attempted == 0 ? 0 : ((completed / attempted) * 100).round();
-          }(valueOrDefault(currentUserDocument?.todayCompleted, 0),
-              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
-        ));
-
-        await currentUserReference!.update({
-          ...createUsersRecordData(
-            disciplineScoreChange: functions.calculateDisciplineChange(
+          FFAppState().pendingChallengeId = '';
+          FFAppState().pendingChallengeRef = null;
+          safeSetState(() {});
+        }
+        if (functions.isNewWeekReset(
+                currentUserDocument?.lastWeeklyReset, getCurrentTimestamp) ==
+            true) {
+          await currentUserReference!.update(createUsersRecordData(
+            weeklyScoreChange: 0,
+            lastWeeklyReset: getCurrentTimestamp,
+            weeklyCompleted: 0,
+          ));
+        }
+        if (!functions.isSameDay(
+            currentUserDocument?.lastDailyReset, getCurrentTimestamp)) {
+          await currentUserReference!.update(createUsersRecordData(
+            yesterdayCompleted:
                 valueOrDefault(currentUserDocument?.todayCompleted, 0),
-                valueOrDefault(currentUserDocument?.todayAttempted, 0),
-                valueOrDefault(currentUserDocument?.currentStreak, 0)),
-            disciplineScore:
-                valueOrDefault(currentUserDocument?.disciplineScore, 0) +
-                    functions.calculateDisciplineChange(
-                        valueOrDefault(currentUserDocument?.todayCompleted, 0),
-                        valueOrDefault(currentUserDocument?.todayAttempted, 0),
-                        valueOrDefault(currentUserDocument?.currentStreak, 0)),
-          ),
-          ...mapToFirestore(
-            {
-              'weekly_score_change': FieldValue.increment(
+            yesterdayCompletionPercentage: (int completed, int attempted) {
+              return attempted == 0
+                  ? 0
+                  : ((completed / attempted) * 100).round();
+            }(valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+          ));
+
+          await currentUserReference!.update({
+            ...createUsersRecordData(
+              disciplineScoreChange: functions.calculateDisciplineChange(
+                  valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                  valueOrDefault(currentUserDocument?.todayAttempted, 0),
+                  valueOrDefault(currentUserDocument?.currentStreak, 0)),
+              disciplineScore: valueOrDefault(
+                      currentUserDocument?.disciplineScore, 0) +
                   functions.calculateDisciplineChange(
                       valueOrDefault(currentUserDocument?.todayCompleted, 0),
                       valueOrDefault(currentUserDocument?.todayAttempted, 0),
-                      valueOrDefault(currentUserDocument?.currentStreak, 0))),
-            },
-          ),
-        });
+                      valueOrDefault(currentUserDocument?.currentStreak, 0)),
+            ),
+            ...mapToFirestore(
+              {
+                'weekly_score_change': FieldValue.increment(
+                    functions.calculateDisciplineChange(
+                        valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                        valueOrDefault(currentUserDocument?.todayAttempted, 0),
+                        valueOrDefault(currentUserDocument?.currentStreak, 0))),
+              },
+            ),
+          });
 
-        await currentUserReference!.update(createUsersRecordData(
-          daysWon: (int won, int completed, int attempted) {
-            return attempted > 0 && completed == attempted ? won + 1 : won;
-          }(
-              valueOrDefault(currentUserDocument?.daysWon, 0),
-              valueOrDefault(currentUserDocument?.todayCompleted, 0),
-              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
-          daysLost: (int lost, int completed, int attempted) {
-            return attempted > 0 && completed < attempted ? lost + 1 : lost;
-          }(
-              valueOrDefault(currentUserDocument?.daysLost, 0),
-              valueOrDefault(currentUserDocument?.todayCompleted, 0),
-              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
-          lastScoreUpdate: getCurrentTimestamp,
-        ));
-
-        await currentUserReference!.update(createUsersRecordData(
-          todayScreenTime: 0,
-        ));
-        if (valueOrDefault(currentUserDocument?.todayCompleted, 0) == 0) {
           await currentUserReference!.update(createUsersRecordData(
-            currentStreak: 0,
+            daysWon: (int won, int completed, int attempted) {
+              return attempted > 0 && completed == attempted ? won + 1 : won;
+            }(
+                valueOrDefault(currentUserDocument?.daysWon, 0),
+                valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+            daysLost: (int lost, int completed, int attempted) {
+              return attempted > 0 && completed < attempted ? lost + 1 : lost;
+            }(
+                valueOrDefault(currentUserDocument?.daysLost, 0),
+                valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+            lastScoreUpdate: getCurrentTimestamp,
           ));
-        } else if (valueOrDefault(currentUserDocument?.todayAttempted, 0) > 0) {
+
           await currentUserReference!.update(createUsersRecordData(
-            currentStreak: 0,
+            todayScreenTime: 0,
+          ));
+          if (valueOrDefault(currentUserDocument?.todayCompleted, 0) == 0) {
+            await currentUserReference!.update(createUsersRecordData(
+              currentStreak: 0,
+            ));
+          } else if (valueOrDefault(currentUserDocument?.todayAttempted, 0) >
+              0) {
+            await currentUserReference!.update(createUsersRecordData(
+              currentStreak: 0,
+            ));
+          }
+
+          await currentUserReference!.update(createUsersRecordData(
+            todayCompleted: 0,
+            todayAttempted: 0,
+            todayXp: 0,
+            focusMinutesToday: 0,
+          ));
+
+          await currentUserReference!.update(createUsersRecordData(
+            lastDailyReset: getCurrentTimestamp,
+          ));
+
+          await currentUserReference!.update(createUsersRecordData(
+            todayStart: getCurrentTimestamp,
           ));
         }
-
-        await currentUserReference!.update(createUsersRecordData(
-          todayCompleted: 0,
-          todayAttempted: 0,
-          todayXp: 0,
-          focusMinutesToday: 0,
-        ));
-
-        await currentUserReference!.update(createUsersRecordData(
-          lastDailyReset: getCurrentTimestamp,
-        ));
-
-        await currentUserReference!.update(createUsersRecordData(
-          todayStart: getCurrentTimestamp,
-        ));
       }
     });
   }

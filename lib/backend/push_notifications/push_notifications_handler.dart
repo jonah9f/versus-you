@@ -127,6 +127,10 @@ final parametersBuilderMap =
   'ChangeEmailPage': ParameterData.none(),
   'ChangePasswordPage': ParameterData.none(),
   'PrivacyPage': ParameterData.none(),
+  'Onboarding1': ParameterData.none(),
+  'Onboarding2': ParameterData.none(),
+  'Onboarding3': ParameterData.none(),
+  'Onboarding4': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

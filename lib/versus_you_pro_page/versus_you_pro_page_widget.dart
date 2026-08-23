@@ -1,5 +1,8 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'versus_you_pro_page_model.dart';
@@ -683,18 +686,16 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Versus You Pro is coming soon.',
-                          style: GoogleFonts.manrope(
-                            color: Colors.white,
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 4000),
-                        backgroundColor: Color(0xFF78E84C),
-                      ),
-                    );
+                    _model.purchaseSuccess =
+                        await revenue_cat.purchasePackage('\$rc_monthly');
+                    if (_model.purchaseSuccess == true) {
+                      await currentUserReference!.update(createUsersRecordData(
+                        premium: true,
+                      ));
+                      context.safePop();
+                    }
+
+                    safeSetState(() {});
                   },
                   child: Container(
                     width: double.infinity,
@@ -710,7 +711,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
                       child: Text(
                         'Start Versus You Pro',
                         textAlign: TextAlign.center,
@@ -740,18 +741,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Purchase restoration will be available at launch',
-                            style: GoogleFonts.manrope(
-                              color: Colors.white,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor: Color(0xFF78E84C),
-                        ),
-                      );
+                      await revenue_cat.restorePurchases();
                     },
                     child: Text(
                       'Restore Purchases',

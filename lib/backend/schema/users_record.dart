@@ -356,6 +356,11 @@ class UsersRecord extends FirestoreRecord {
   int get consecutiveMissedDays => _consecutiveMissedDays ?? 0;
   bool hasConsecutiveMissedDays() => _consecutiveMissedDays != null;
 
+  // "hasCompletedOnboarding" field.
+  bool? _hasCompletedOnboarding;
+  bool get hasCompletedOnboarding => _hasCompletedOnboarding ?? false;
+  bool hasHasCompletedOnboarding() => _hasCompletedOnboarding != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -444,6 +449,7 @@ class UsersRecord extends FirestoreRecord {
     _lastWeeklyReset = snapshotData['last_weekly_reset'] as DateTime?;
     _consecutiveMissedDays =
         castToType<int>(snapshotData['consecutiveMissedDays']);
+    _hasCompletedOnboarding = snapshotData['hasCompletedOnboarding'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -548,6 +554,7 @@ Map<String, dynamic> createUsersRecordData({
   int? monthlyScreenTimeLogCount,
   DateTime? lastWeeklyReset,
   int? consecutiveMissedDays,
+  bool? hasCompletedOnboarding,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -619,6 +626,7 @@ Map<String, dynamic> createUsersRecordData({
       'monthly_screen_time_log_count': monthlyScreenTimeLogCount,
       'last_weekly_reset': lastWeeklyReset,
       'consecutiveMissedDays': consecutiveMissedDays,
+      'hasCompletedOnboarding': hasCompletedOnboarding,
     }.withoutNulls,
   );
 
@@ -698,7 +706,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.screenTimeLastLoggedDate == e2?.screenTimeLastLoggedDate &&
         e1?.monthlyScreenTimeLogCount == e2?.monthlyScreenTimeLogCount &&
         e1?.lastWeeklyReset == e2?.lastWeeklyReset &&
-        e1?.consecutiveMissedDays == e2?.consecutiveMissedDays;
+        e1?.consecutiveMissedDays == e2?.consecutiveMissedDays &&
+        e1?.hasCompletedOnboarding == e2?.hasCompletedOnboarding;
   }
 
   @override
@@ -770,7 +779,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.screenTimeLastLoggedDate,
         e?.monthlyScreenTimeLogCount,
         e?.lastWeeklyReset,
-        e?.consecutiveMissedDays
+        e?.consecutiveMissedDays,
+        e?.hasCompletedOnboarding
       ]);
 
   @override
