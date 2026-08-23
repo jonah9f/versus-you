@@ -1,7 +1,9 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/edit_challenge_form_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -155,10 +157,26 @@ class _EditChallengeWidgetState extends State<EditChallengeWidget> {
                       ) ??
                       false;
                   if (confirmDialogResponse) {
-                    await actions.cancelChallengeReminders(
-                      widget.challengeDoc!.notificationKey,
-                      widget.challengeDoc!.repeatDays.toList(),
+                    unawaited(
+                      () async {
+                        await actions.cancelChallengeReminders(
+                          widget.challengeDoc!.notificationKey,
+                          widget.challengeDoc!.repeatDays.toList(),
+                        );
+                      }(),
                     );
+                    _model.freshChallenge =
+                        await ChallengesRecord.getDocumentOnce(
+                            widget.challengeDoc!.reference);
+                    if (_model.freshChallenge?.completedToday == true) {
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'today_completed': FieldValue.increment(-(1)),
+                          },
+                        ),
+                      });
+                    }
                     await widget.challengeDoc!.reference.delete();
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -175,6 +193,8 @@ class _EditChallengeWidgetState extends State<EditChallengeWidget> {
                       ),
                     );
                   }
+
+                  safeSetState(() {});
                 },
                 child: Container(
                   width: 120.0,

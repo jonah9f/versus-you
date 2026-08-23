@@ -163,6 +163,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: AboutVersusYouPageWidget.routeName,
           path: AboutVersusYouPageWidget.routePath,
           builder: (context, params) => AboutVersusYouPageWidget(),
+        ),
+        FFRoute(
+          name: EditProfilePageWidget.routeName,
+          path: EditProfilePageWidget.routePath,
+          builder: (context, params) => EditProfilePageWidget(),
+        ),
+        FFRoute(
+          name: ChangeEmailPageWidget.routeName,
+          path: ChangeEmailPageWidget.routePath,
+          builder: (context, params) => ChangeEmailPageWidget(),
+        ),
+        FFRoute(
+          name: ChangePasswordPageWidget.routeName,
+          path: ChangePasswordPageWidget.routePath,
+          builder: (context, params) => ChangePasswordPageWidget(),
+        ),
+        FFRoute(
+          name: PrivacyPageWidget.routeName,
+          path: PrivacyPageWidget.routePath,
+          builder: (context, params) => PrivacyPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<DocumentReference?> initializeNotificationHandling() async {
+Future<DocumentReference?> initializeNotificationHandling(
+  BuildContext context,
+) async {
   print('🔥 INIT NOTIFICATION HANDLING STARTED');
   final notificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -35,11 +37,39 @@ Future<DocumentReference?> initializeNotificationHandling() async {
       print('NOTIFICATION TAP payload=$payload');
 
       if (payload != null && payload.isNotEmpty) {
+        if (payload == 'daily_quote') {
+          if (context.mounted) {
+            context.goNamed('HomePage');
+          }
+          return;
+        }
+
+        if (payload == 'daily_motivation') {
+          if (context.mounted) {
+            context.goNamed('HomePage');
+          }
+          return;
+        }
+
+        if (payload.startsWith('missed_day_')) {
+          if (context.mounted) {
+            context.goNamed('HomePage');
+          }
+          return;
+        }
+
         FFAppState().update(() {
           FFAppState().pendingChallengeId = payload;
           FFAppState().pendingChallengeRef =
               FirebaseFirestore.instance.collection('challenges').doc(payload);
         });
+
+        print('PENDING ID AFTER SET: ${FFAppState().pendingChallengeId}');
+        print('TAP REF SET: ${FFAppState().pendingChallengeRef}');
+
+        if (context.mounted) {
+          context.goNamed('GoalsPage');
+        }
       }
     },
   );
@@ -53,13 +83,33 @@ Future<DocumentReference?> initializeNotificationHandling() async {
     print('NOTIFICATION LAUNCH payload=$payload');
 
     if (payload != null && payload.isNotEmpty) {
-      FFAppState().update(() {
-        FFAppState().pendingChallengeId = payload;
-        FFAppState().pendingChallengeRef =
-            FirebaseFirestore.instance.collection('challenges').doc(payload);
-      });
+      if (payload == 'daily_quote') {
+        if (context.mounted) {
+          context.goNamed('HomePage');
+        }
+      } else if (payload == 'daily_motivation') {
+        if (context.mounted) {
+          context.goNamed('HomePage');
+        }
+      } else if (payload.startsWith('missed_day_')) {
+        if (context.mounted) {
+          context.goNamed('HomePage');
+        }
+      } else {
+        FFAppState().update(() {
+          FFAppState().pendingChallengeId = payload;
+          FFAppState().pendingChallengeRef =
+              FirebaseFirestore.instance.collection('challenges').doc(payload);
+        });
+
+        print('LAUNCH REF SET: ${FFAppState().pendingChallengeRef}');
+
+        if (context.mounted) {
+          context.goNamed('GoalsPage');
+        }
+      }
     }
   }
-  return FFAppState().pendingChallengeRef;
   print('NOTIFICATION HANDLING INITIALIZED');
+  return FFAppState().pendingChallengeRef;
 }

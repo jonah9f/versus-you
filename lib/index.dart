@@ -18,3 +18,10 @@ export '/terms_privacy_page/terms_privacy_page_widget.dart'
     show TermsPrivacyPageWidget;
 export '/about_versus_you_page/about_versus_you_page_widget.dart'
     show AboutVersusYouPageWidget;
+export '/edit_profile_page/edit_profile_page_widget.dart'
+    show EditProfilePageWidget;
+export '/change_email_page/change_email_page_widget.dart'
+    show ChangeEmailPageWidget;
+export '/change_password_page/change_password_page_widget.dart'
+    show ChangePasswordPageWidget;
+export '/privacy_page/privacy_page_widget.dart' show PrivacyPageWidget;

@@ -126,7 +126,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                               0.0, 0.0, 0.0, 20.0),
                           child: Container(
                             width: double.infinity,
-                            height: 160.0,
+                            height: 202.0,
                             decoration: BoxDecoration(
                               color: Color(0xFF1C1C1C),
                               borderRadius: BorderRadius.only(

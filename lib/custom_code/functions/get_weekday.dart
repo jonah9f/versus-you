@@ -13,10 +13,6 @@ import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-String disciplineScoreRating(int score) {
-  if (score >= 800) return 'Elite';
-  if (score >= 740) return 'Excellent';
-  if (score >= 670) return 'Strong';
-  if (score >= 580) return 'Building';
-  return 'Needs Work';
+int getWeekday(DateTime date) {
+  return date.weekday;
 }

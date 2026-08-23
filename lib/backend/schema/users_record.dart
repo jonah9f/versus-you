@@ -301,6 +301,61 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get weeklyPerformanceStart => _weeklyPerformanceStart;
   bool hasWeeklyPerformanceStart() => _weeklyPerformanceStart != null;
 
+  // "focus_minutes_today" field.
+  int? _focusMinutesToday;
+  int get focusMinutesToday => _focusMinutesToday ?? 0;
+  bool hasFocusMinutesToday() => _focusMinutesToday != null;
+
+  // "sleep_minutes_today" field.
+  int? _sleepMinutesToday;
+  int get sleepMinutesToday => _sleepMinutesToday ?? 0;
+  bool hasSleepMinutesToday() => _sleepMinutesToday != null;
+
+  // "sleep_total_minutes" field.
+  int? _sleepTotalMinutes;
+  int get sleepTotalMinutes => _sleepTotalMinutes ?? 0;
+  bool hasSleepTotalMinutes() => _sleepTotalMinutes != null;
+
+  // "sleep_days_logged" field.
+  int? _sleepDaysLogged;
+  int get sleepDaysLogged => _sleepDaysLogged ?? 0;
+  bool hasSleepDaysLogged() => _sleepDaysLogged != null;
+
+  // "sleep_last_logged_date" field.
+  DateTime? _sleepLastLoggedDate;
+  DateTime? get sleepLastLoggedDate => _sleepLastLoggedDate;
+  bool hasSleepLastLoggedDate() => _sleepLastLoggedDate != null;
+
+  // "monthly_focus_minutes" field.
+  int? _monthlyFocusMinutes;
+  int get monthlyFocusMinutes => _monthlyFocusMinutes ?? 0;
+  bool hasMonthlyFocusMinutes() => _monthlyFocusMinutes != null;
+
+  // "monthly_screen_time_minutes" field.
+  int? _monthlyScreenTimeMinutes;
+  int get monthlyScreenTimeMinutes => _monthlyScreenTimeMinutes ?? 0;
+  bool hasMonthlyScreenTimeMinutes() => _monthlyScreenTimeMinutes != null;
+
+  // "screen_time_last_logged_date" field.
+  DateTime? _screenTimeLastLoggedDate;
+  DateTime? get screenTimeLastLoggedDate => _screenTimeLastLoggedDate;
+  bool hasScreenTimeLastLoggedDate() => _screenTimeLastLoggedDate != null;
+
+  // "monthly_screen_time_log_count" field.
+  int? _monthlyScreenTimeLogCount;
+  int get monthlyScreenTimeLogCount => _monthlyScreenTimeLogCount ?? 0;
+  bool hasMonthlyScreenTimeLogCount() => _monthlyScreenTimeLogCount != null;
+
+  // "last_weekly_reset" field.
+  DateTime? _lastWeeklyReset;
+  DateTime? get lastWeeklyReset => _lastWeeklyReset;
+  bool hasLastWeeklyReset() => _lastWeeklyReset != null;
+
+  // "consecutiveMissedDays" field.
+  int? _consecutiveMissedDays;
+  int get consecutiveMissedDays => _consecutiveMissedDays ?? 0;
+  bool hasConsecutiveMissedDays() => _consecutiveMissedDays != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -373,6 +428,22 @@ class UsersRecord extends FirestoreRecord {
     _appearanceMode = snapshotData['appearance_mode'] as String?;
     _weeklyPerformanceStart =
         snapshotData['weekly_performance_start'] as DateTime?;
+    _focusMinutesToday = castToType<int>(snapshotData['focus_minutes_today']);
+    _sleepMinutesToday = castToType<int>(snapshotData['sleep_minutes_today']);
+    _sleepTotalMinutes = castToType<int>(snapshotData['sleep_total_minutes']);
+    _sleepDaysLogged = castToType<int>(snapshotData['sleep_days_logged']);
+    _sleepLastLoggedDate = snapshotData['sleep_last_logged_date'] as DateTime?;
+    _monthlyFocusMinutes =
+        castToType<int>(snapshotData['monthly_focus_minutes']);
+    _monthlyScreenTimeMinutes =
+        castToType<int>(snapshotData['monthly_screen_time_minutes']);
+    _screenTimeLastLoggedDate =
+        snapshotData['screen_time_last_logged_date'] as DateTime?;
+    _monthlyScreenTimeLogCount =
+        castToType<int>(snapshotData['monthly_screen_time_log_count']);
+    _lastWeeklyReset = snapshotData['last_weekly_reset'] as DateTime?;
+    _consecutiveMissedDays =
+        castToType<int>(snapshotData['consecutiveMissedDays']);
   }
 
   static CollectionReference get collection =>
@@ -466,6 +537,17 @@ Map<String, dynamic> createUsersRecordData({
   int? screenTimeGoalMinutes,
   String? appearanceMode,
   DateTime? weeklyPerformanceStart,
+  int? focusMinutesToday,
+  int? sleepMinutesToday,
+  int? sleepTotalMinutes,
+  int? sleepDaysLogged,
+  DateTime? sleepLastLoggedDate,
+  int? monthlyFocusMinutes,
+  int? monthlyScreenTimeMinutes,
+  DateTime? screenTimeLastLoggedDate,
+  int? monthlyScreenTimeLogCount,
+  DateTime? lastWeeklyReset,
+  int? consecutiveMissedDays,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -526,6 +608,17 @@ Map<String, dynamic> createUsersRecordData({
       'screen_time_goal_minutes': screenTimeGoalMinutes,
       'appearance_mode': appearanceMode,
       'weekly_performance_start': weeklyPerformanceStart,
+      'focus_minutes_today': focusMinutesToday,
+      'sleep_minutes_today': sleepMinutesToday,
+      'sleep_total_minutes': sleepTotalMinutes,
+      'sleep_days_logged': sleepDaysLogged,
+      'sleep_last_logged_date': sleepLastLoggedDate,
+      'monthly_focus_minutes': monthlyFocusMinutes,
+      'monthly_screen_time_minutes': monthlyScreenTimeMinutes,
+      'screen_time_last_logged_date': screenTimeLastLoggedDate,
+      'monthly_screen_time_log_count': monthlyScreenTimeLogCount,
+      'last_weekly_reset': lastWeeklyReset,
+      'consecutiveMissedDays': consecutiveMissedDays,
     }.withoutNulls,
   );
 
@@ -594,7 +687,18 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.notificationsEnabled == e2?.notificationsEnabled &&
         e1?.screenTimeGoalMinutes == e2?.screenTimeGoalMinutes &&
         e1?.appearanceMode == e2?.appearanceMode &&
-        e1?.weeklyPerformanceStart == e2?.weeklyPerformanceStart;
+        e1?.weeklyPerformanceStart == e2?.weeklyPerformanceStart &&
+        e1?.focusMinutesToday == e2?.focusMinutesToday &&
+        e1?.sleepMinutesToday == e2?.sleepMinutesToday &&
+        e1?.sleepTotalMinutes == e2?.sleepTotalMinutes &&
+        e1?.sleepDaysLogged == e2?.sleepDaysLogged &&
+        e1?.sleepLastLoggedDate == e2?.sleepLastLoggedDate &&
+        e1?.monthlyFocusMinutes == e2?.monthlyFocusMinutes &&
+        e1?.monthlyScreenTimeMinutes == e2?.monthlyScreenTimeMinutes &&
+        e1?.screenTimeLastLoggedDate == e2?.screenTimeLastLoggedDate &&
+        e1?.monthlyScreenTimeLogCount == e2?.monthlyScreenTimeLogCount &&
+        e1?.lastWeeklyReset == e2?.lastWeeklyReset &&
+        e1?.consecutiveMissedDays == e2?.consecutiveMissedDays;
   }
 
   @override
@@ -655,7 +759,18 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.notificationsEnabled,
         e?.screenTimeGoalMinutes,
         e?.appearanceMode,
-        e?.weeklyPerformanceStart
+        e?.weeklyPerformanceStart,
+        e?.focusMinutesToday,
+        e?.sleepMinutesToday,
+        e?.sleepTotalMinutes,
+        e?.sleepDaysLogged,
+        e?.sleepLastLoggedDate,
+        e?.monthlyFocusMinutes,
+        e?.monthlyScreenTimeMinutes,
+        e?.screenTimeLastLoggedDate,
+        e?.monthlyScreenTimeLogCount,
+        e?.lastWeeklyReset,
+        e?.consecutiveMissedDays
       ]);
 
   @override

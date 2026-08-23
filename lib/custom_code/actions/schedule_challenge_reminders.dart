@@ -44,34 +44,6 @@ Future scheduleChallengeReminders(
     iOS: iosInitializationSettings,
   );
 
-  await notificationsPlugin.initialize(
-    initializationSettings,
-    onDidReceiveNotificationResponse: (NotificationResponse response) async {
-      final payload = response.payload;
-
-      if (payload != null && payload.isNotEmpty) {
-        FFAppState().pendingChallengeId = payload;
-        FFAppState().pendingChallengeRef =
-            FirebaseFirestore.instance.collection('challenges').doc(payload);
-      }
-    },
-  );
-
-  final launchDetails =
-      await notificationsPlugin.getNotificationAppLaunchDetails();
-
-  if (launchDetails?.didNotificationLaunchApp ?? false) {
-    final payload = launchDetails?.notificationResponse?.payload;
-
-    print('NOTIFICATION LAUNCH payload=$payload');
-
-    if (payload != null && payload.isNotEmpty) {
-      FFAppState().pendingChallengeId = payload;
-      FFAppState().pendingChallengeRef =
-          FirebaseFirestore.instance.collection('challenges').doc(payload);
-    }
-  }
-
   print('REMINDER: notifications initialized');
 
   final androidPlugin =
@@ -164,10 +136,24 @@ Future scheduleChallengeReminders(
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-      payload: challengeId,
+      payload: challengeId.split(' - ').first,
     );
-    print('REMINDER: zonedSchedule completed');
+    if (challengeType == 'Build a Habit') {
+      final followUpDate = scheduledDate.add(const Duration(minutes: 30));
+      final followUpNotificationId =
+          _stableNotificationId('${challengeId}_followup', weekday);
 
+      await notificationsPlugin.zonedSchedule(
+        followUpNotificationId,
+        'Versus You',
+        'Still need to complete $challengeName? Tap here to finish your challenge.',
+        followUpDate,
+        notificationDetails,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+        payload: challengeId.split(' - ').first,
+      );
+    }
     final pending = await notificationsPlugin.pendingNotificationRequests();
 
     print(

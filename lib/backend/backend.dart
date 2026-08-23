@@ -13,6 +13,7 @@ import 'schema/screen_time_logs_record.dart';
 import 'schema/achievements_record.dart';
 import 'schema/daily_quotes_record.dart';
 import 'schema/feedback_record.dart';
+import 'schema/sleep_logs_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -29,6 +30,7 @@ export 'schema/screen_time_logs_record.dart';
 export 'schema/achievements_record.dart';
 export 'schema/daily_quotes_record.dart';
 export 'schema/feedback_record.dart';
+export 'schema/sleep_logs_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -321,6 +323,43 @@ Future<List<FeedbackRecord>> queryFeedbackRecordOnce({
     queryCollectionOnce(
       FeedbackRecord.collection,
       FeedbackRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query SleepLogsRecords (as a Stream and as a Future).
+Future<int> querySleepLogsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      SleepLogsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<SleepLogsRecord>> querySleepLogsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SleepLogsRecord.collection,
+      SleepLogsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SleepLogsRecord>> querySleepLogsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SleepLogsRecord.collection,
+      SleepLogsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

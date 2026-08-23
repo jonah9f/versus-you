@@ -1,9 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/complete_challege_sheet_widget.dart';
+import '/components/complete_challege_sheet_copy_widget.dart';
 import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -37,8 +38,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      unawaited(
+        () async {
+          await actions.scheduleDailyQuoteNotification();
+        }(),
+      );
+      unawaited(
+        () async {
+          await actions.scheduleDailyMotivationNotification();
+        }(),
+      );
+      await actions.scheduleMissedDayReminders();
       _model.notificationChallengeRef =
-          await actions.initializeNotificationHandling();
+          await actions.initializeNotificationHandling(
+        context,
+      );
       if (_model.notificationChallengeRef != null) {
         _model.notifcationChallenge = await ChallengesRecord.getDocumentOnce(
             _model.notificationChallengeRef!);
@@ -55,7 +69,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               },
               child: Padding(
                 padding: MediaQuery.viewInsetsOf(context),
-                child: CompleteChallegeSheetWidget(
+                child: CompleteChallegeSheetCopyWidget(
                   challengeDoc: _model.notifcationChallenge!,
                 ),
               ),
@@ -67,11 +81,84 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         FFAppState().pendingChallengeRef = null;
         safeSetState(() {});
       }
+      if (functions.isNewWeekReset(
+              currentUserDocument?.lastWeeklyReset, getCurrentTimestamp) ==
+          true) {
+        await currentUserReference!.update(createUsersRecordData(
+          weeklyScoreChange: 0,
+          lastWeeklyReset: getCurrentTimestamp,
+          weeklyCompleted: 0,
+        ));
+      }
       if (!functions.isSameDay(
           currentUserDocument?.lastDailyReset, getCurrentTimestamp)) {
         await currentUserReference!.update(createUsersRecordData(
+          yesterdayCompleted:
+              valueOrDefault(currentUserDocument?.todayCompleted, 0),
+          yesterdayCompletionPercentage: (int completed, int attempted) {
+            return attempted == 0 ? 0 : ((completed / attempted) * 100).round();
+          }(valueOrDefault(currentUserDocument?.todayCompleted, 0),
+              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+        ));
+
+        await currentUserReference!.update({
+          ...createUsersRecordData(
+            disciplineScoreChange: functions.calculateDisciplineChange(
+                valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                valueOrDefault(currentUserDocument?.todayAttempted, 0),
+                valueOrDefault(currentUserDocument?.currentStreak, 0)),
+            disciplineScore:
+                valueOrDefault(currentUserDocument?.disciplineScore, 0) +
+                    functions.calculateDisciplineChange(
+                        valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                        valueOrDefault(currentUserDocument?.todayAttempted, 0),
+                        valueOrDefault(currentUserDocument?.currentStreak, 0)),
+          ),
+          ...mapToFirestore(
+            {
+              'weekly_score_change': FieldValue.increment(
+                  functions.calculateDisciplineChange(
+                      valueOrDefault(currentUserDocument?.todayCompleted, 0),
+                      valueOrDefault(currentUserDocument?.todayAttempted, 0),
+                      valueOrDefault(currentUserDocument?.currentStreak, 0))),
+            },
+          ),
+        });
+
+        await currentUserReference!.update(createUsersRecordData(
+          daysWon: (int won, int completed, int attempted) {
+            return attempted > 0 && completed == attempted ? won + 1 : won;
+          }(
+              valueOrDefault(currentUserDocument?.daysWon, 0),
+              valueOrDefault(currentUserDocument?.todayCompleted, 0),
+              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+          daysLost: (int lost, int completed, int attempted) {
+            return attempted > 0 && completed < attempted ? lost + 1 : lost;
+          }(
+              valueOrDefault(currentUserDocument?.daysLost, 0),
+              valueOrDefault(currentUserDocument?.todayCompleted, 0),
+              valueOrDefault(currentUserDocument?.todayAttempted, 0)),
+          lastScoreUpdate: getCurrentTimestamp,
+        ));
+
+        await currentUserReference!.update(createUsersRecordData(
+          todayScreenTime: 0,
+        ));
+        if (valueOrDefault(currentUserDocument?.todayCompleted, 0) == 0) {
+          await currentUserReference!.update(createUsersRecordData(
+            currentStreak: 0,
+          ));
+        } else if (valueOrDefault(currentUserDocument?.todayAttempted, 0) > 0) {
+          await currentUserReference!.update(createUsersRecordData(
+            currentStreak: 0,
+          ));
+        }
+
+        await currentUserReference!.update(createUsersRecordData(
           todayCompleted: 0,
           todayAttempted: 0,
+          todayXp: 0,
+          focusMinutesToday: 0,
         ));
 
         await currentUserReference!.update(createUsersRecordData(
@@ -126,54 +213,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Text(
-                                    'Versus ',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.w800,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: Color(0xFFB0B0B0),
-                                          fontSize: 40.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w800,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 23.0, 0.0),
-                                    child: Text(
-                                      'You',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.manrope(
-                                              fontWeight: FontWeight.w800,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: Color(0xFF78E84C),
-                                            fontSize: 40.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/C2E2C0DF-707F-4902-BC44-D49E6E511634.png',
+                                      width: 220.0,
+                                      height: 65.0,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   Spacer(),
@@ -181,24 +227,43 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 15.0),
+                                    0.0, 20.0, 0.0, 15.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Icon(
-                                      Icons.local_fire_department_sharp,
-                                      color: Color(0xFFFF8A3D),
-                                      size: 26.0,
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/1B67E27B-EA95-49EE-A404-542F24D23F5B.png',
+                                        width: 20.0,
+                                        height: 20.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    AuthUserStreamWidget(
-                                      builder: (context) => Text(
-                                        functions.formatStreak(valueOrDefault(
-                                            currentUserDocument?.currentStreak,
-                                            0)),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                          font: GoogleFonts.manrope(
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 0.0, 0.0, 0.0),
+                                      child: AuthUserStreamWidget(
+                                        builder: (context) => Text(
+                                          functions.formatStreak(valueOrDefault(
+                                              currentUserDocument
+                                                  ?.currentStreak,
+                                              0)),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                            font: GoogleFonts.manrope(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFFFF8A3D),
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
@@ -207,24 +272,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .fontStyle,
+                                            shadows: [
+                                              Shadow(
+                                                color: Color(0xFFFF8A3D),
+                                                offset: Offset(0.0, 0.0),
+                                                blurRadius: 30.0,
+                                              )
+                                            ],
                                           ),
-                                          color: Color(0xFFFF8A3D),
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                          shadows: [
-                                            Shadow(
-                                              color: Color(0xFFFF8A3D),
-                                              offset: Offset(0.0, 0.0),
-                                              blurRadius: 30.0,
-                                            )
-                                          ],
                                         ),
                                       ),
                                     ),
@@ -865,6 +920,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         'completed_today',
                                         isEqualTo: false,
                                       )
+                                      .where(
+                                        'repeat_days',
+                                        arrayContains: const [
+                                          'Mon',
+                                          'Tue',
+                                          'Wed',
+                                          'Thu',
+                                          'Fri',
+                                          'Sat',
+                                          'Sun'
+                                        ][DateTime.now().weekday - 1],
+                                      )
                                       .orderBy('created_time'),
                               limit: 1,
                             ),
@@ -1115,14 +1182,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     currentUserDocument
                                                         ?.totalXp,
                                                     0)),
-                                        width: 325.0,
+                                        width: 316.0,
                                         lineHeight: 22.0,
                                         animation: true,
                                         animateFromLastPercent: true,
                                         progressColor: Color(0xFF78E84C),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent4,
+                                        backgroundColor: Color(0xFFB0B0B0),
                                         padding: EdgeInsets.zero,
                                       ),
                                     ),
@@ -1133,6 +1198,164 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 14.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 140.0,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1C1C1C),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
+                      ),
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                      child: StreamBuilder<List<DailyQuotesRecord>>(
+                        stream: queryDailyQuotesRecord(
+                          queryBuilder: (dailyQuotesRecord) =>
+                              dailyQuotesRecord.where(
+                            'quote_number',
+                            isEqualTo: (DateTime.now()
+                                        .difference(DateTime(2026, 1, 1))
+                                        .inDays %
+                                    40) +
+                                1,
+                          ),
+                          singleRecord: true,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<DailyQuotesRecord> columnDailyQuotesRecordList =
+                              snapshot.data!;
+                          final columnDailyQuotesRecord =
+                              columnDailyQuotesRecordList.isNotEmpty
+                                  ? columnDailyQuotesRecordList.first
+                                  : null;
+
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 20.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Daily Reminder',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.manrope(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFB0B0B0),
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.bolt,
+                                  color: Color(0xFF78E84C),
+                                  size: 24.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      columnDailyQuotesRecord?.quote,
+                                      'Stay Disciplined',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                  ),
+                                ),
+                                Text(
+                                  valueOrDefault<String>(
+                                    columnDailyQuotesRecord?.author,
+                                    'Unknown',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xFFB0B0B0),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

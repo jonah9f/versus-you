@@ -17,6 +17,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "repeat_days",
+          "arrayConfig": "CONTAINS"
+        },
+        {
           "fieldPath": "created_time",
           "order": "ASCENDING"
         }
@@ -35,8 +39,30 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "repeat_days",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "challenges",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "user_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_active",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "completed_today",
           "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "repeat_days",
+          "arrayConfig": "CONTAINS"
         },
         {
           "fieldPath": "created_time",
@@ -59,24 +85,6 @@
         {
           "fieldPath": "completed_time",
           "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "challenges",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "user_ref",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "is_active",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "scheduled_date",
-          "order": "ASCENDING"
         }
       ]
     },

@@ -123,6 +123,10 @@ final parametersBuilderMap =
   'FeedbackPage': ParameterData.none(),
   'TermsPrivacyPage': ParameterData.none(),
   'AboutVersusYouPage': ParameterData.none(),
+  'EditProfilePage': ParameterData.none(),
+  'ChangeEmailPage': ParameterData.none(),
+  'ChangePasswordPage': ParameterData.none(),
+  'PrivacyPage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

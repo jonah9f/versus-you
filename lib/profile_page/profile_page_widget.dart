@@ -591,10 +591,20 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             ),
                                       ),
                                       Spacer(),
-                                      Icon(
-                                        Icons.chevron_right_sharp,
-                                        color: Color(0xFFB0B0B0),
-                                        size: 20.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                              EditProfilePageWidget.routeName);
+                                        },
+                                        child: Icon(
+                                          Icons.chevron_right_sharp,
+                                          color: Color(0xFFB0B0B0),
+                                          size: 20.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -646,10 +656,20 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             ),
                                       ),
                                       Spacer(),
-                                      Icon(
-                                        Icons.chevron_right_sharp,
-                                        color: Color(0xFFB0B0B0),
-                                        size: 20.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                              ChangeEmailPageWidget.routeName);
+                                        },
+                                        child: Icon(
+                                          Icons.chevron_right_sharp,
+                                          color: Color(0xFFB0B0B0),
+                                          size: 20.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -701,10 +721,21 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             ),
                                       ),
                                       Spacer(),
-                                      Icon(
-                                        Icons.chevron_right_sharp,
-                                        color: Color(0xFFB0B0B0),
-                                        size: 20.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                              ChangePasswordPageWidget
+                                                  .routeName);
+                                        },
+                                        child: Icon(
+                                          Icons.chevron_right_sharp,
+                                          color: Color(0xFFB0B0B0),
+                                          size: 20.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -756,10 +787,20 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             ),
                                       ),
                                       Spacer(),
-                                      Icon(
-                                        Icons.chevron_right_sharp,
-                                        color: Color(0xFFB0B0B0),
-                                        size: 20.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                              PrivacyPageWidget.routeName);
+                                        },
+                                        child: Icon(
+                                          Icons.chevron_right_sharp,
+                                          color: Color(0xFFB0B0B0),
+                                          size: 20.0,
+                                        ),
                                       ),
                                     ],
                                   ),

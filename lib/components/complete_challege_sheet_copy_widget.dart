@@ -3,15 +3,16 @@ import '/backend/backend.dart';
 import '/components/slip_reason_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'complete_challege_sheet_model.dart';
-export 'complete_challege_sheet_model.dart';
+import 'complete_challege_sheet_copy_model.dart';
+export 'complete_challege_sheet_copy_model.dart';
 
-class CompleteChallegeSheetWidget extends StatefulWidget {
-  const CompleteChallegeSheetWidget({
+class CompleteChallegeSheetCopyWidget extends StatefulWidget {
+  const CompleteChallegeSheetCopyWidget({
     super.key,
     required this.challengeDoc,
   });
@@ -19,13 +20,13 @@ class CompleteChallegeSheetWidget extends StatefulWidget {
   final ChallengesRecord? challengeDoc;
 
   @override
-  State<CompleteChallegeSheetWidget> createState() =>
-      _CompleteChallegeSheetWidgetState();
+  State<CompleteChallegeSheetCopyWidget> createState() =>
+      _CompleteChallegeSheetCopyWidgetState();
 }
 
-class _CompleteChallegeSheetWidgetState
-    extends State<CompleteChallegeSheetWidget> {
-  late CompleteChallegeSheetModel _model;
+class _CompleteChallegeSheetCopyWidgetState
+    extends State<CompleteChallegeSheetCopyWidget> {
+  late CompleteChallegeSheetCopyModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -36,7 +37,7 @@ class _CompleteChallegeSheetWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CompleteChallegeSheetModel());
+    _model = createModel(context, () => CompleteChallegeSheetCopyModel());
   }
 
   @override
@@ -215,12 +216,12 @@ class _CompleteChallegeSheetWidgetState
                         widget.challengeDoc!.reference,
                         90,
                       );
+                    } else {
+                      await widget.challengeDoc!.reference
+                          .update(createChallengesRecordData(
+                        completedToday: true,
+                      ));
                     }
-
-                    await widget.challengeDoc!.reference
-                        .update(createChallengesRecordData(
-                      completedToday: true,
-                    ));
 
                     safeSetState(() {});
                   },
@@ -333,16 +334,129 @@ class _CompleteChallegeSheetWidgetState
                         },
                       ),
                     });
-
-                    await currentUserReference!.update(createUsersRecordData(
-                      mondayPerformance: (int completed, int attempted) {
-                        return attempted == 0 ? 0.0 : completed / attempted;
-                      }(
-                          valueOrDefault(
-                              currentUserDocument?.todayCompleted, 0),
-                          valueOrDefault(
-                              currentUserDocument?.todayAttempted, 0)),
-                    ));
+                    if (functions.getWeekday(getCurrentTimestamp).toString() ==
+                        '1') {
+                      await currentUserReference!.update(createUsersRecordData(
+                        mondayPerformance: (int completed, int attempted) {
+                          return attempted == 0 ? 0.0 : completed / attempted;
+                        }(
+                            valueOrDefault(
+                                currentUserDocument?.todayCompleted, 0),
+                            valueOrDefault(
+                                currentUserDocument?.todayAttempted, 0)),
+                      ));
+                    } else {
+                      if (functions
+                              .getWeekday(getCurrentTimestamp)
+                              .toString() ==
+                          '2') {
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          tuesdayPerformace: (int completed, int attempted) {
+                            return attempted == 0 ? 0.0 : completed / attempted;
+                          }(
+                              valueOrDefault(
+                                  currentUserDocument?.todayCompleted, 0),
+                              valueOrDefault(
+                                  currentUserDocument?.todayAttempted, 0)),
+                        ));
+                      } else {
+                        if (functions
+                                .getWeekday(getCurrentTimestamp)
+                                .toString() ==
+                            '3') {
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            wednesdayPerformace: (int completed,
+                                    int attempted) {
+                              return attempted == 0
+                                  ? 0.0
+                                  : completed / attempted;
+                            }(
+                                valueOrDefault(
+                                    currentUserDocument?.todayCompleted, 0),
+                                valueOrDefault(
+                                    currentUserDocument?.todayAttempted, 0)),
+                          ));
+                        } else {
+                          if (functions
+                                  .getWeekday(getCurrentTimestamp)
+                                  .toString() ==
+                              '4') {
+                            await currentUserReference!
+                                .update(createUsersRecordData(
+                              thursdayPerformance: (int completed,
+                                      int attempted) {
+                                return attempted == 0
+                                    ? 0.0
+                                    : completed / attempted;
+                              }(
+                                  valueOrDefault(
+                                      currentUserDocument?.todayCompleted, 0),
+                                  valueOrDefault(
+                                      currentUserDocument?.todayAttempted, 0)),
+                            ));
+                          } else {
+                            if (functions
+                                    .getWeekday(getCurrentTimestamp)
+                                    .toString() ==
+                                '5') {
+                              await currentUserReference!
+                                  .update(createUsersRecordData(
+                                fridayPerformace: (int completed,
+                                        int attempted) {
+                                  return attempted == 0
+                                      ? 0.0
+                                      : completed / attempted;
+                                }(
+                                    valueOrDefault(
+                                        currentUserDocument?.todayCompleted, 0),
+                                    valueOrDefault(
+                                        currentUserDocument?.todayAttempted,
+                                        0)),
+                              ));
+                            } else {
+                              if (functions
+                                      .getWeekday(getCurrentTimestamp)
+                                      .toString() ==
+                                  '6') {
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  saturdayPerformance: (int completed,
+                                          int attempted) {
+                                    return attempted == 0
+                                        ? 0.0
+                                        : completed / attempted;
+                                  }(
+                                      valueOrDefault(
+                                          currentUserDocument?.todayCompleted,
+                                          0),
+                                      valueOrDefault(
+                                          currentUserDocument?.todayAttempted,
+                                          0)),
+                                ));
+                              } else {
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  sundayPerformance: (int completed,
+                                          int attempted) {
+                                    return attempted == 0
+                                        ? 0.0
+                                        : completed / attempted;
+                                  }(
+                                      valueOrDefault(
+                                          currentUserDocument?.todayCompleted,
+                                          0),
+                                      valueOrDefault(
+                                          currentUserDocument?.todayAttempted,
+                                          0)),
+                                ));
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                   if (!functions.isSameDay(
                       currentUserDocument?.lastCompletionDate,
@@ -399,6 +513,20 @@ class _CompleteChallegeSheetWidgetState
                       ));
                     }
                   }
+                  unawaited(
+                    () async {
+                      await actions.cancelChallengeFollowUpReminder(
+                        widget.challengeDoc!.notificationKey,
+                        widget.challengeDoc!.name,
+                        widget.challengeDoc?.reminderTime,
+                      );
+                    }(),
+                  );
+                  unawaited(
+                    () async {
+                      await actions.resetMissedDayReminders();
+                    }(),
+                  );
                   Navigator.pop(context);
 
                   safeSetState(() {});

@@ -713,6 +713,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                       monthlyChallengesCompleted: 0,
                                       monthlyHoursFocused: 0.0,
                                       monthlyAverageSleep: 0.0,
+                                      weeklyGoal: 25,
                                     ));
 
                                 context.goNamedAuth(
