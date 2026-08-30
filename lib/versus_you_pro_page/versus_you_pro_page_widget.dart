@@ -688,11 +688,25 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                   onTap: () async {
                     _model.purchaseSuccess =
                         await revenue_cat.purchasePackage('\$rc_monthly');
-                    if (_model.purchaseSuccess == true) {
+                    if (_model.purchaseSuccess!) {
                       await currentUserReference!.update(createUsersRecordData(
                         premium: true,
                       ));
                       context.safePop();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'purchase failed',
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
                     }
 
                     safeSetState(() {});

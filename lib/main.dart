@@ -29,6 +29,7 @@ void main() async {
   await revenue_cat.initialize(
     "appl_bDZaJInnVkOXQXZOJnvJXRjTKmO",
     "",
+    debugLogEnabled: true,
     loadDataAfterLaunch: true,
   );
 
