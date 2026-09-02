@@ -493,9 +493,9 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 28.0, 165.0, 12.0),
+                                  0.0, 28.0, 150.0, 12.0),
                               child: Text(
-                                'Weekly Performace',
+                                'Weekly Performance',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

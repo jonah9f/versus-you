@@ -573,110 +573,156 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    if (_model.choiceChipsValue != null &&
-                        _model.choiceChipsValue != '') {
-                      _model.notificationKey =
-                          '${currentUserUid} - ${getCurrentTimestamp.toString()}';
-                      safeSetState(() {});
-                      if (_model.reminderSwitchValue!) {
-                        await ChallengesRecord.collection.doc().set({
-                          ...createChallengesRecordData(
-                            userRef: currentUserReference,
-                            name: _model.challengeNameFieldTextController.text,
-                            xpReward: _model.xpRewardDropdownValue,
-                            isActive: true,
-                            reminderTime: _model.selectedReminderTime,
-                            createdTime: getCurrentTimestamp,
-                            scheduledDate: _model.selectedReminderTime,
-                            challengeType: _model.choiceChipsValue,
-                            completedToday: false,
-                            reminderEnabled: true,
-                            cleanStreak: 0,
-                            bestCleanStreak: 0,
-                            slipCount: 0,
-                            notificationKey: _model.notificationKey,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'repeat_days': _model.repeatDaysChoiceChipsValues,
-                            },
-                          ),
-                        });
-                      } else {
-                        await ChallengesRecord.collection.doc().set({
-                          ...createChallengesRecordData(
-                            userRef: currentUserReference,
-                            name: _model.challengeNameFieldTextController.text,
-                            xpReward: _model.xpRewardDropdownValue,
-                            isActive: true,
-                            createdTime: getCurrentTimestamp,
-                            scheduledDate: getCurrentTimestamp,
-                            challengeType: _model.choiceChipsValue,
-                            completedToday: false,
-                            reminderEnabled: false,
-                            slipCount: 0,
-                            cleanStreak: 0,
-                            bestCleanStreak: 0,
-                            notificationKey: _model.notificationKey,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'repeat_days': _model.repeatDaysChoiceChipsValues,
-                            },
-                          ),
-                        });
-                      }
+                    if (_model.selectedReminderTime != null) {
+                      if ((_model.repeatDaysChoiceChipsValues != null &&
+                              (_model.repeatDaysChoiceChipsValues)!
+                                  .isNotEmpty) ==
+                          true) {
+                        if (_model.choiceChipsValue != null &&
+                            _model.choiceChipsValue != '') {
+                          _model.notificationKey =
+                              '${currentUserUid} - ${getCurrentTimestamp.toString()}';
+                          safeSetState(() {});
+                          if (_model.reminderSwitchValue!) {
+                            await ChallengesRecord.collection.doc().set({
+                              ...createChallengesRecordData(
+                                userRef: currentUserReference,
+                                name: _model
+                                    .challengeNameFieldTextController.text,
+                                xpReward: _model.xpRewardDropdownValue,
+                                isActive: true,
+                                reminderTime: _model.selectedReminderTime,
+                                createdTime: getCurrentTimestamp,
+                                scheduledDate: _model.selectedReminderTime,
+                                challengeType: _model.choiceChipsValue,
+                                completedToday: false,
+                                reminderEnabled: true,
+                                cleanStreak: 0,
+                                bestCleanStreak: 0,
+                                slipCount: 0,
+                                notificationKey: _model.notificationKey,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'repeat_days':
+                                      _model.repeatDaysChoiceChipsValues,
+                                },
+                              ),
+                            });
+                          } else {
+                            await ChallengesRecord.collection.doc().set({
+                              ...createChallengesRecordData(
+                                userRef: currentUserReference,
+                                name: _model
+                                    .challengeNameFieldTextController.text,
+                                xpReward: _model.xpRewardDropdownValue,
+                                isActive: true,
+                                createdTime: getCurrentTimestamp,
+                                scheduledDate: getCurrentTimestamp,
+                                challengeType: _model.choiceChipsValue,
+                                completedToday: false,
+                                reminderEnabled: false,
+                                slipCount: 0,
+                                cleanStreak: 0,
+                                bestCleanStreak: 0,
+                                notificationKey: _model.notificationKey,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'repeat_days':
+                                      _model.repeatDaysChoiceChipsValues,
+                                },
+                              ),
+                            });
+                          }
 
-                      if ((_model.reminderSwitchValue == true) &&
-                          (valueOrDefault<bool>(
-                                  currentUserDocument?.notificationsEnabled,
-                                  false) ==
-                              true)) {
-                        await actions.scheduleChallengeReminders(
-                          _model.challengeNameFieldTextController.text,
-                          _model.datePicked!,
-                          _model.repeatDaysChoiceChipsValues!.toList(),
-                          _model.notificationKey,
-                          _model.choiceChipsValue!,
+                          if ((_model.reminderSwitchValue == true) &&
+                              (valueOrDefault<bool>(
+                                      currentUserDocument?.notificationsEnabled,
+                                      false) ==
+                                  true)) {
+                            await actions.scheduleChallengeReminders(
+                              _model.challengeNameFieldTextController.text,
+                              _model.datePicked!,
+                              _model.repeatDaysChoiceChipsValues!.toList(),
+                              _model.notificationKey,
+                              _model.choiceChipsValue!,
+                            );
+                          }
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'challenges_attempted': FieldValue.increment(1),
+                              },
+                            ),
+                          });
+                          Navigator.pop(context);
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'challenges_attempted': FieldValue.increment(1),
+                              },
+                            ),
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Challenge Added',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: Color(0xFF87E84C),
+                            ),
+                          );
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Choose Challenge Type'),
+                                content: Text(
+                                    'Select Build a Habit or Break a Habit before continuing.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Select Repeat Day(s)'),
+                              content:
+                                  Text('Choose your day(s) to be reminded'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       }
-
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'challenges_attempted': FieldValue.increment(1),
-                          },
-                        ),
-                      });
-                      Navigator.pop(context);
-
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'challenges_attempted': FieldValue.increment(1),
-                          },
-                        ),
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Challenge Added',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor: Color(0xFF87E84C),
-                        ),
-                      );
                     } else {
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
                           return AlertDialog(
-                            title: Text('Choose Challenge Type'),
-                            content: Text(
-                                'Select Build a Habit or Break a Habit before continuing.'),
+                            title: Text('Select Reminder Time'),
+                            content: Text('Choose a time to be reminded'),
                             actions: [
                               TextButton(
                                 onPressed: () =>

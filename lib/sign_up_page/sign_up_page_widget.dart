@@ -706,7 +706,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                       totalXp: 0,
                                       currentStreak: 0,
                                       bestStreak: 0,
-                                      disciplineScore: 0,
+                                      disciplineScore: 500,
                                       premium: false,
                                       createdTime: getCurrentTimestamp,
                                       monthlyStatsMonth: getCurrentTimestamp,

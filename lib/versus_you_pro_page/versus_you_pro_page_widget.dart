@@ -688,7 +688,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                   onTap: () async {
                     _model.purchaseSuccess =
                         await revenue_cat.purchasePackage('\$rc_monthly');
-                    if (_model.purchaseSuccess!) {
+                    if (_model.purchaseSuccess == true) {
                       await currentUserReference!.update(createUsersRecordData(
                         premium: true,
                       ));
