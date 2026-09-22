@@ -716,7 +716,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: MyFuturePageWidget.routeName,
           path: MyFuturePageWidget.routePath,
-          builder: (context, params) => MyFuturePageWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'MyFuturePage')
+              : MyFuturePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

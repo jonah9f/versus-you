@@ -177,6 +177,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'GoalsPage': GoalsPageWidget(),
       'StatsPage': StatsPageWidget(),
       'ProfilePage': ProfilePageWidget(),
+      'MyFuturePage': MyFuturePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
