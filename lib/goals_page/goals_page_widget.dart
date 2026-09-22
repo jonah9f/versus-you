@@ -260,140 +260,127 @@ class _GoalsPageWidgetState extends State<GoalsPageWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   14.0, 14.0, 14.0, 14.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 25.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF78E84C),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16.0),
-                                    topRight: Radius.circular(16.0),
-                                    bottomLeft: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(16.0),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        if (valueOrDefault<bool>(
-                                                currentUserDocument?.premium,
-                                                false) ==
-                                            true) {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            isDismissible: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: Container(
-                                                    height: 530.0,
-                                                    child:
-                                                        AddChallengeSheetWidget(),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        } else {
-                                          await queryChallengesRecordCount(
-                                            queryBuilder: (challengesRecord) =>
-                                                challengesRecord
-                                                    .where(
-                                                      'user_ref',
-                                                      isEqualTo:
-                                                          currentUserReference,
-                                                    )
-                                                    .where(
-                                                      'is_active',
-                                                      isEqualTo: true,
-                                                    ),
-                                          );
-                                          if (goalsPageChallengesRecordList
-                                                  .length <
-                                              5) {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              isDismissible: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: Container(
-                                                      height: 530.0,
-                                                      child:
-                                                          AddChallengeSheetWidget(),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
-                                          } else {
-                                            context.pushNamed(
-                                                VersusYouProPageWidget
-                                                    .routeName);
-                                          }
-                                        }
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (valueOrDefault<bool>(
+                                          currentUserDocument?.premium,
+                                          false) ==
+                                      true) {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      isDismissible: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: Container(
+                                              height: 530.0,
+                                              child: AddChallengeSheetWidget(),
+                                            ),
+                                          ),
+                                        );
                                       },
-                                      child: Icon(
+                                    ).then((value) => safeSetState(() {}));
+                                  } else {
+                                    await queryChallengesRecordCount(
+                                      queryBuilder: (challengesRecord) =>
+                                          challengesRecord
+                                              .where(
+                                                'user_ref',
+                                                isEqualTo: currentUserReference,
+                                              )
+                                              .where(
+                                                'is_active',
+                                                isEqualTo: true,
+                                              ),
+                                    );
+                                    if (goalsPageChallengesRecordList.length <
+                                        5) {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        isDismissible: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: Container(
+                                                height: 530.0,
+                                                child:
+                                                    AddChallengeSheetWidget(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    } else {
+                                      context.pushNamed(
+                                          VersusYouProPageWidget.routeName);
+                                    }
+                                  }
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 25.0,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF78E84C),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
                                         Icons.add,
                                         color: Color(0xFF111111),
                                         size: 16.0,
                                       ),
-                                    ),
-                                    Text(
-                                      'Add Challenge',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.manrope(
+                                      Text(
+                                        'Add Challenge',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.manrope(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -2398,16 +2385,6 @@ class _GoalsPageWidgetState extends State<GoalsPageWidget> {
                                               ),
                                             ),
                                             Spacer(),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: Icon(
-                                                Icons.more_vert,
-                                                color: Color(0xFFB0B0B0),
-                                                size: 22.0,
-                                              ),
-                                            ),
                                           ],
                                         );
                                       },

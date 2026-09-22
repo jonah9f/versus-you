@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'versus_you_pro_page_model.dart';
@@ -64,47 +65,37 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.safePop();
-                              },
-                              child: Icon(
-                                Icons.chevron_left,
-                                color: Colors.white,
-                                size: 28.0,
-                              ),
-                            ),
-                            Text(
-                              'Versus You Pro',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.manrope(
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'YOUR PLAN IS READY',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Colors.white,
+                                      fontSize: 28.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Colors.white,
-                                    fontSize: 28.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
+                              ),
                             ),
                           ],
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 0.0, 0.0, 24.0),
+                              15.0, 0.0, 0.0, 10.0),
                           child: Text(
-                            'Unlock the tools that push you beyond your limit',
+                            'Now become the person you said you want to be.',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -126,112 +117,9 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 20.0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 202.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF1C1C1C),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                                bottomLeft: Radius.circular(20.0),
-                                bottomRight: Radius.circular(20.0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'VERSUS YOU PRO',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: Color(0xFF78E84C),
-                                          fontSize: 12.0,
-                                          letterSpacing: 1.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Become harder to beat.',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: Colors.white,
-                                          fontSize: 29.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Get deeper insights, stronger accountability and advanced tools built to keep you disciplined.',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: Color(0xFFB0B0B0),
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.4,
-                                        ),
-                                  ),
-                                  Icon(
-                                    Icons.workspace_premium,
-                                    color: Color(0xFF78E84C),
-                                    size: 46.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
                               15.0, 0.0, 0.0, 0.0),
                           child: Text(
-                            'Everything Included',
+                            'Your personalized Versus You system is ready. Turn your goals into daily actions and track the person you\'re becoming.',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -241,8 +129,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                                  color: Colors.white,
-                                  fontSize: 20.0,
+                                  color: Color(0xFF78E84C),
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FlutterFlowTheme.of(context)
@@ -282,7 +169,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                         size: 22.0,
                                       ),
                                       Text(
-                                        'Advanced Discipline Insights',
+                                        'Your Personalized Daily Plan',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -324,7 +211,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                               size: 22.0,
                                             ),
                                             Text(
-                                              'Unlimited Active Challenges',
+                                              'Build & Break Habits',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -373,7 +260,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                               size: 22.0,
                                             ),
                                             Text(
-                                              'Deeper Weekly and Monthly Stats',
+                                              'Daily Discipline Score',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -422,7 +309,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                               size: 22.0,
                                             ),
                                             Text(
-                                              'Advanced Reminder Controls',
+                                              'Streaks, XP & Progress Tracking',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -471,7 +358,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                               size: 22.0,
                                             ),
                                             Text(
-                                              'Custom Themes and App Icons',
+                                              'Smart Reminders & Scheduling',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -520,7 +407,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                               size: 22.0,
                                             ),
                                             Text(
-                                              'Priority Access to New Features',
+                                              'Full Progress & Performance Stats',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -692,7 +579,10 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                       await currentUserReference!.update(createUsersRecordData(
                         premium: true,
                       ));
-                      context.safePop();
+                      if (Navigator.of(context).canPop()) {
+                        context.pop();
+                      }
+                      context.pushNamed(HomePageWidget.routeName);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -727,18 +617,18 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
                       child: Text(
-                        'Start Versus You Pro',
+                        'Start Versus You',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.manrope(
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.bold,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .fontStyle,
                               ),
                               fontSize: 17.0,
                               letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.bold,
                               fontStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .fontStyle,
@@ -756,6 +646,26 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       await revenue_cat.restorePurchases();
+                      if (revenue_cat.activeEntitlementIds
+                          .contains('versus_you_pro')) {
+                        if (Navigator.of(context).canPop()) {
+                          context.pop();
+                        }
+                        context.pushNamed(HomePageWidget.routeName);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'No active Versus You Pro purchase was found to restore',
+                              style: GoogleFonts.manrope(
+                                color: Colors.white,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor: Color(0xFF78E84C),
+                          ),
+                        );
+                      }
                     },
                     child: Text(
                       'Restore Purchases',
@@ -774,80 +684,6 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                                 .bodyMedium
                                 .fontStyle,
                           ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 0.0, 0.0),
-                  child: Container(
-                    width: 350.0,
-                    height: 100.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1C1C1C),
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
-                            child: Text(
-                              'Built for results, not distraction.',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 2.0, 0.0, 0.0),
-                            child: Text(
-                              'Versus You Pro is designed to give you more control and insight - not more noise',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFFB0B0B0),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.verified,
-                            color: Color(0xFF78E84C),
-                            size: 22.0,
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ),

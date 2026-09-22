@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'add_challenge_sheet_widget.dart' show AddChallengeSheetWidget;
@@ -35,6 +36,10 @@ class AddChallengeSheetModel extends FlutterFlowModel<AddChallengeSheetWidget> {
       repeatDaysChoiceChipsValueController?.value;
   set repeatDaysChoiceChipsValues(List<String>? val) =>
       repeatDaysChoiceChipsValueController?.value = val;
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  ChallengesRecord? createdChallenge;
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  ChallengesRecord? createdChallenge2;
 
   @override
   void initState(BuildContext context) {}

@@ -203,6 +203,520 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: Onboarding4Widget.routeName,
           path: Onboarding4Widget.routePath,
           builder: (context, params) => Onboarding4Widget(),
+        ),
+        FFRoute(
+          name: Onboarding5Widget.routeName,
+          path: Onboarding5Widget.routePath,
+          builder: (context, params) => Onboarding5Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding6Widget.routeName,
+          path: Onboarding6Widget.routePath,
+          builder: (context, params) => Onboarding6Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding7Widget.routeName,
+          path: Onboarding7Widget.routePath,
+          builder: (context, params) => Onboarding7Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding8Widget.routeName,
+          path: Onboarding8Widget.routePath,
+          builder: (context, params) => Onboarding8Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding9Widget.routeName,
+          path: Onboarding9Widget.routePath,
+          builder: (context, params) => Onboarding9Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding10Widget.routeName,
+          path: Onboarding10Widget.routePath,
+          builder: (context, params) => Onboarding10Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding11Widget.routeName,
+          path: Onboarding11Widget.routePath,
+          builder: (context, params) => Onboarding11Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding12Widget.routeName,
+          path: Onboarding12Widget.routePath,
+          builder: (context, params) => Onboarding12Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            consistencyLevel: params.getParam(
+              'consistencyLevel',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding13Widget.routeName,
+          path: Onboarding13Widget.routePath,
+          builder: (context, params) => Onboarding13Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            consistencyLevel: params.getParam(
+              'consistencyLevel',
+              ParamType.String,
+            ),
+            commitmentLevel: params.getParam(
+              'commitmentLevel',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Onboarding14Widget.routeName,
+          path: Onboarding14Widget.routePath,
+          builder: (context, params) => Onboarding14Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            consistencyLevel: params.getParam(
+              'consistencyLevel',
+              ParamType.String,
+            ),
+            commitmentLevel: params.getParam(
+              'commitmentLevel',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MyFuturePageWidget.routeName,
+          path: MyFuturePageWidget.routePath,
+          builder: (context, params) => MyFuturePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

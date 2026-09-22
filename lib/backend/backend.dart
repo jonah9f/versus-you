@@ -14,6 +14,9 @@ import 'schema/achievements_record.dart';
 import 'schema/daily_quotes_record.dart';
 import 'schema/feedback_record.dart';
 import 'schema/sleep_logs_record.dart';
+import 'schema/milestones_record.dart';
+import 'schema/progress_reviews_record.dart';
+import 'schema/vision_reviews_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -31,6 +34,9 @@ export 'schema/achievements_record.dart';
 export 'schema/daily_quotes_record.dart';
 export 'schema/feedback_record.dart';
 export 'schema/sleep_logs_record.dart';
+export 'schema/milestones_record.dart';
+export 'schema/progress_reviews_record.dart';
+export 'schema/vision_reviews_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -360,6 +366,117 @@ Future<List<SleepLogsRecord>> querySleepLogsRecordOnce({
     queryCollectionOnce(
       SleepLogsRecord.collection,
       SleepLogsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query MilestonesRecords (as a Stream and as a Future).
+Future<int> queryMilestonesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      MilestonesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<MilestonesRecord>> queryMilestonesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      MilestonesRecord.collection,
+      MilestonesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<MilestonesRecord>> queryMilestonesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      MilestonesRecord.collection,
+      MilestonesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ProgressReviewsRecords (as a Stream and as a Future).
+Future<int> queryProgressReviewsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ProgressReviewsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ProgressReviewsRecord>> queryProgressReviewsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ProgressReviewsRecord.collection,
+      ProgressReviewsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ProgressReviewsRecord>> queryProgressReviewsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ProgressReviewsRecord.collection,
+      ProgressReviewsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query VisionReviewsRecords (as a Stream and as a Future).
+Future<int> queryVisionReviewsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      VisionReviewsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<VisionReviewsRecord>> queryVisionReviewsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      VisionReviewsRecord.collection,
+      VisionReviewsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<VisionReviewsRecord>> queryVisionReviewsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      VisionReviewsRecord.collection,
+      VisionReviewsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

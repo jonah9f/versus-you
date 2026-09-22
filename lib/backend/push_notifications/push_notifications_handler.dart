@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'serialization_util.dart';
 
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -136,6 +137,147 @@ final parametersBuilderMap =
   'Onboarding2': ParameterData.none(),
   'Onboarding3': ParameterData.none(),
   'Onboarding4': ParameterData.none(),
+  'Onboarding5': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+        },
+      ),
+  'Onboarding6': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding7': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding8': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding9': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding10': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding11': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding12': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'consistencyLevel': getParameter<String>(data, 'consistencyLevel'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding13': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'consistencyLevel': getParameter<String>(data, 'consistencyLevel'),
+          'commitmentLevel': getParameter<String>(data, 'commitmentLevel'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'Onboarding14': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'consistencyLevel': getParameter<String>(data, 'consistencyLevel'),
+          'commitmentLevel': getParameter<String>(data, 'commitmentLevel'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
+  'MyFuturePage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -20,146 +20,151 @@ Future scheduleChallengeReminders(
   String challengeId,
   String challengeType,
 ) async {
-  final notificationsPlugin = FlutterLocalNotificationsPlugin();
+  try {
+    final notificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  print(
-    'REMINDER ACTION START | '
-    'name=$challengeName | '
-    'time=$reminderTime | '
-    'repeatDays=$repeatDays | '
-    'challengeId=$challengeId',
-  );
+    print(
+      'REMINDER ACTION START | '
+      'name=$challengeName | '
+      'time=$reminderTime | '
+      'repeatDays=$repeatDays | '
+      'challengeId=$challengeId',
+    );
 
-  const androidInitializationSettings =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidInitializationSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  const iosInitializationSettings = DarwinInitializationSettings(
-    requestAlertPermission: true,
-    requestBadgePermission: true,
-    requestSoundPermission: true,
-  );
+    const iosInitializationSettings = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
 
-  const initializationSettings = InitializationSettings(
-    android: androidInitializationSettings,
-    iOS: iosInitializationSettings,
-  );
+    const initializationSettings = InitializationSettings(
+      android: androidInitializationSettings,
+      iOS: iosInitializationSettings,
+    );
 
-  print('REMINDER: notifications initialized');
+    print('REMINDER: notifications initialized');
 
-  final androidPlugin =
-      notificationsPlugin.resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>();
+    final androidPlugin =
+        notificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
 
-  await androidPlugin?.requestNotificationsPermission();
-  await androidPlugin?.requestExactAlarmsPermission();
+    await androidPlugin?.requestNotificationsPermission();
+    await androidPlugin?.requestExactAlarmsPermission();
 
-  tz.initializeTimeZones();
+    tz.initializeTimeZones();
 
-  final localTimezone = await FlutterTimezone.getLocalTimezone();
-  print('REMINDER: timezone=${localTimezone.identifier}');
-  tz.setLocalLocation(tz.getLocation(localTimezone.identifier));
-
-  const androidNotificationDetails = AndroidNotificationDetails(
-    'challenge_reminders',
-    'Challenge Reminders',
-    channelDescription: 'Recurring reminders for Versus You challenges',
-    importance: Importance.high,
-    priority: Priority.high,
-  );
-
-  const iosNotificationDetails = DarwinNotificationDetails(
-    presentAlert: true,
-    presentBadge: true,
-    presentSound: true,
-  );
-
-  const notificationDetails = NotificationDetails(
-    android: androidNotificationDetails,
-    iOS: iosNotificationDetails,
-  );
-
-  final weekdayMap = <String, int>{
-    'Monday': DateTime.monday,
-    'Tuesday': DateTime.tuesday,
-    'Wednesday': DateTime.wednesday,
-    'Thursday': DateTime.thursday,
-    'Friday': DateTime.friday,
-    'Saturday': DateTime.saturday,
-    'Sunday': DateTime.sunday,
-    'Mon': DateTime.monday,
-    'Tue': DateTime.tuesday,
-    'Wed': DateTime.wednesday,
-    'Thu': DateTime.thursday,
-    'Fri': DateTime.friday,
-    'Sat': DateTime.saturday,
-    'Sun': DateTime.sunday,
-  };
-
-  for (final dayName in repeatDays) {
-    final weekday = weekdayMap[dayName];
+    final localTimezone = await FlutterTimezone.getLocalTimezone();
     print('REMINDER: timezone=${localTimezone.identifier}');
+    tz.setLocalLocation(tz.getLocation(localTimezone.identifier));
 
-    if (weekday == null) {
-      continue;
-    }
-
-    final scheduledDate = _nextWeekdayTime(
-      weekday,
-      reminderTime.hour,
-      reminderTime.minute,
-    );
-    print(
-      'VERSUS YOU REMINDER: $challengeName | '
-      'weekday=$weekday | '
-      'scheduled=$scheduledDate | '
-      'now=${tz.TZDateTime.now(tz.local)}',
+    const androidNotificationDetails = AndroidNotificationDetails(
+      'challenge_reminders',
+      'Challenge Reminders',
+      channelDescription: 'Recurring reminders for Versus You challenges',
+      importance: Importance.high,
+      priority: Priority.high,
     );
 
-    final notificationId = _stableNotificationId(challengeId, weekday);
-    print(
-      'REMINDER SCHEDULE ID | '
-      'challenge=$challengeId | '
-      'day=$dayName | '
-      'weekday=$weekday | '
-      'id=$notificationId',
+    const iosNotificationDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
     );
 
-    final notificationBody = challengeType == 'Break a Habit'
-        ? 'Did you stay on track with: $challengeName?'
-        : 'Time to complete: $challengeName';
-
-    await notificationsPlugin.zonedSchedule(
-      notificationId,
-      'Versus You',
-      notificationBody,
-      scheduledDate,
-      notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-      payload: challengeId.split(' - ').first,
+    const notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: iosNotificationDetails,
     );
-    if (challengeType == 'Build a Habit') {
-      final followUpDate = scheduledDate.add(const Duration(minutes: 30));
-      final followUpNotificationId =
-          _stableNotificationId('${challengeId}_followup', weekday);
+
+    final weekdayMap = <String, int>{
+      'Monday': DateTime.monday,
+      'Tuesday': DateTime.tuesday,
+      'Wednesday': DateTime.wednesday,
+      'Thursday': DateTime.thursday,
+      'Friday': DateTime.friday,
+      'Saturday': DateTime.saturday,
+      'Sunday': DateTime.sunday,
+      'Mon': DateTime.monday,
+      'Tue': DateTime.tuesday,
+      'Wed': DateTime.wednesday,
+      'Thu': DateTime.thursday,
+      'Fri': DateTime.friday,
+      'Sat': DateTime.saturday,
+      'Sun': DateTime.sunday,
+    };
+
+    for (final dayName in repeatDays) {
+      final weekday = weekdayMap[dayName];
+      print('REMINDER: timezone=${localTimezone.identifier}');
+
+      if (weekday == null) {
+        continue;
+      }
+
+      final scheduledDate = _nextWeekdayTime(
+        weekday,
+        reminderTime.hour,
+        reminderTime.minute,
+      );
+      print(
+        'VERSUS YOU REMINDER: $challengeName | '
+        'weekday=$weekday | '
+        'scheduled=$scheduledDate | '
+        'now=${tz.TZDateTime.now(tz.local)}',
+      );
+
+      final notificationId = _stableNotificationId(challengeId, weekday);
+      print(
+        'REMINDER SCHEDULE ID | '
+        'challenge=$challengeId | '
+        'day=$dayName | '
+        'weekday=$weekday | '
+        'id=$notificationId',
+      );
+
+      final notificationBody = challengeType == 'Break a Habit'
+          ? 'Did you stay on track with: $challengeName?'
+          : 'Time to complete: $challengeName';
 
       await notificationsPlugin.zonedSchedule(
-        followUpNotificationId,
+        notificationId,
         'Versus You',
-        'Still need to complete $challengeName? Tap here to finish your challenge.',
-        followUpDate,
+        notificationBody,
+        scheduledDate,
         notificationDetails,
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
         payload: challengeId.split(' - ').first,
       );
-    }
-    final pending = await notificationsPlugin.pendingNotificationRequests();
+      if (challengeType == 'Build a Habit') {
+        final followUpDate = scheduledDate.add(const Duration(minutes: 30));
+        final followUpNotificationId =
+            _stableNotificationId('${challengeId}_followup', weekday);
 
-    print(
-      'REMINDER: pending notifications = '
-      '${pending.map((n) => '${n.id}:${n.title}').toList()}',
-    );
+        await notificationsPlugin.zonedSchedule(
+          followUpNotificationId,
+          'Versus You',
+          'Still need to complete $challengeName? Tap here to finish your challenge.',
+          followUpDate,
+          notificationDetails,
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+          payload: challengeId.split(' - ').first,
+        );
+      }
+      final pending = await notificationsPlugin.pendingNotificationRequests();
+
+      print(
+        'REMINDER: pending notifications = '
+        '${pending.map((n) => '${n.id}:${n.title}').toList()}',
+      );
+    }
+  } catch (e, stackTrace) {
+    print('scheduleChallengeReminders ERROR: $e');
+    print(stackTrace);
   }
 }
 

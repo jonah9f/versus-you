@@ -28,3 +28,5 @@ export '/custom_code/functions/format_screen_time_goal.dart';
 export '/custom_code/functions/double_to_int.dart';
 export '/custom_code/functions/is_new_week_reset.dart';
 export '/custom_code/functions/get_weekday.dart';
+export '/custom_code/functions/add_months_to_date.dart';
+export '/custom_code/functions/add_daysto_date.dart';

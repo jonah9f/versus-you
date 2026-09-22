@@ -361,6 +361,31 @@ class UsersRecord extends FirestoreRecord {
   bool get hasCompletedOnboarding => _hasCompletedOnboarding ?? false;
   bool hasHasCompletedOnboarding() => _hasCompletedOnboarding != null;
 
+  // "sixMonthVision" field.
+  String? _sixMonthVision;
+  String get sixMonthVision => _sixMonthVision ?? '';
+  bool hasSixMonthVision() => _sixMonthVision != null;
+
+  // "sixMonthTargetDate" field.
+  DateTime? _sixMonthTargetDate;
+  DateTime? get sixMonthTargetDate => _sixMonthTargetDate;
+  bool hasSixMonthTargetDate() => _sixMonthTargetDate != null;
+
+  // "oneYearVision" field.
+  String? _oneYearVision;
+  String get oneYearVision => _oneYearVision ?? '';
+  bool hasOneYearVision() => _oneYearVision != null;
+
+  // "oneYearTargetDate" field.
+  DateTime? _oneYearTargetDate;
+  DateTime? get oneYearTargetDate => _oneYearTargetDate;
+  bool hasOneYearTargetDate() => _oneYearTargetDate != null;
+
+  // "nextProgressReviewDate" field.
+  DateTime? _nextProgressReviewDate;
+  DateTime? get nextProgressReviewDate => _nextProgressReviewDate;
+  bool hasNextProgressReviewDate() => _nextProgressReviewDate != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -450,6 +475,12 @@ class UsersRecord extends FirestoreRecord {
     _consecutiveMissedDays =
         castToType<int>(snapshotData['consecutiveMissedDays']);
     _hasCompletedOnboarding = snapshotData['hasCompletedOnboarding'] as bool?;
+    _sixMonthVision = snapshotData['sixMonthVision'] as String?;
+    _sixMonthTargetDate = snapshotData['sixMonthTargetDate'] as DateTime?;
+    _oneYearVision = snapshotData['oneYearVision'] as String?;
+    _oneYearTargetDate = snapshotData['oneYearTargetDate'] as DateTime?;
+    _nextProgressReviewDate =
+        snapshotData['nextProgressReviewDate'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -555,6 +586,11 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? lastWeeklyReset,
   int? consecutiveMissedDays,
   bool? hasCompletedOnboarding,
+  String? sixMonthVision,
+  DateTime? sixMonthTargetDate,
+  String? oneYearVision,
+  DateTime? oneYearTargetDate,
+  DateTime? nextProgressReviewDate,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -627,6 +663,11 @@ Map<String, dynamic> createUsersRecordData({
       'last_weekly_reset': lastWeeklyReset,
       'consecutiveMissedDays': consecutiveMissedDays,
       'hasCompletedOnboarding': hasCompletedOnboarding,
+      'sixMonthVision': sixMonthVision,
+      'sixMonthTargetDate': sixMonthTargetDate,
+      'oneYearVision': oneYearVision,
+      'oneYearTargetDate': oneYearTargetDate,
+      'nextProgressReviewDate': nextProgressReviewDate,
     }.withoutNulls,
   );
 
@@ -707,7 +748,12 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.monthlyScreenTimeLogCount == e2?.monthlyScreenTimeLogCount &&
         e1?.lastWeeklyReset == e2?.lastWeeklyReset &&
         e1?.consecutiveMissedDays == e2?.consecutiveMissedDays &&
-        e1?.hasCompletedOnboarding == e2?.hasCompletedOnboarding;
+        e1?.hasCompletedOnboarding == e2?.hasCompletedOnboarding &&
+        e1?.sixMonthVision == e2?.sixMonthVision &&
+        e1?.sixMonthTargetDate == e2?.sixMonthTargetDate &&
+        e1?.oneYearVision == e2?.oneYearVision &&
+        e1?.oneYearTargetDate == e2?.oneYearTargetDate &&
+        e1?.nextProgressReviewDate == e2?.nextProgressReviewDate;
   }
 
   @override
@@ -780,7 +826,12 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.monthlyScreenTimeLogCount,
         e?.lastWeeklyReset,
         e?.consecutiveMissedDays,
-        e?.hasCompletedOnboarding
+        e?.hasCompletedOnboarding,
+        e?.sixMonthVision,
+        e?.sixMonthTargetDate,
+        e?.oneYearVision,
+        e?.oneYearTargetDate,
+        e?.nextProgressReviewDate
       ]);
 
   @override

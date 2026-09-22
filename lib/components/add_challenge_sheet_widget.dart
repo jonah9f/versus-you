@@ -12,7 +12,14 @@ import 'add_challenge_sheet_model.dart';
 export 'add_challenge_sheet_model.dart';
 
 class AddChallengeSheetWidget extends StatefulWidget {
-  const AddChallengeSheetWidget({super.key});
+  const AddChallengeSheetWidget({
+    super.key,
+    this.recommendedHabitName,
+    this.isRecommendedHabit,
+  });
+
+  final String? recommendedHabitName;
+  final bool? isRecommendedHabit;
 
   @override
   State<AddChallengeSheetWidget> createState() =>
@@ -33,7 +40,8 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
     super.initState();
     _model = createModel(context, () => AddChallengeSheetModel());
 
-    _model.challengeNameFieldTextController ??= TextEditingController();
+    _model.challengeNameFieldTextController ??=
+        TextEditingController(text: widget.recommendedHabitName);
     _model.challengeNameFieldFocusNode ??= FocusNode();
 
     _model.reminderSwitchValue = false;
@@ -185,10 +193,11 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                 chipSpacing: 8.0,
                 rowSpacing: 8.0,
                 multiselect: false,
+                initialized: _model.choiceChipsValue != null,
                 alignment: WrapAlignment.start,
                 controller: _model.choiceChipsValueController ??=
                     FormFieldController<List<String>>(
-                  [],
+                  [widget.isRecommendedHabit == true ? 'Build a Habit' : ''],
                 ),
                 wrapped: true,
               ),
@@ -482,7 +491,7 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                 ],
               ),
               Text(
-                'Repeat Days',
+                'Reminder Days',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       font: GoogleFonts.manrope(
                         fontWeight: FontWeight.w600,
@@ -561,7 +570,17 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                 alignment: WrapAlignment.start,
                 controller: _model.repeatDaysChoiceChipsValueController ??=
                     FormFieldController<List<String>>(
-                  [],
+                  (widget.isRecommendedHabit == true
+                      ? <String>[
+                          'Mon',
+                          'Tue',
+                          'Wed',
+                          'Thu',
+                          'Fri',
+                          'Sat',
+                          'Sun'
+                        ]
+                      : <String>[]),
                 ),
                 wrapped: true,
               ),
@@ -584,7 +603,9 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                               '${currentUserUid} - ${getCurrentTimestamp.toString()}';
                           safeSetState(() {});
                           if (_model.reminderSwitchValue!) {
-                            await ChallengesRecord.collection.doc().set({
+                            var challengesRecordReference1 =
+                                ChallengesRecord.collection.doc();
+                            await challengesRecordReference1.set({
                               ...createChallengesRecordData(
                                 userRef: currentUserReference,
                                 name: _model
@@ -609,8 +630,36 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                                 },
                               ),
                             });
+                            _model.createdChallenge =
+                                ChallengesRecord.getDocumentFromData({
+                              ...createChallengesRecordData(
+                                userRef: currentUserReference,
+                                name: _model
+                                    .challengeNameFieldTextController.text,
+                                xpReward: _model.xpRewardDropdownValue,
+                                isActive: true,
+                                reminderTime: _model.selectedReminderTime,
+                                createdTime: getCurrentTimestamp,
+                                scheduledDate: _model.selectedReminderTime,
+                                challengeType: _model.choiceChipsValue,
+                                completedToday: false,
+                                reminderEnabled: true,
+                                cleanStreak: 0,
+                                bestCleanStreak: 0,
+                                slipCount: 0,
+                                notificationKey: _model.notificationKey,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'repeat_days':
+                                      _model.repeatDaysChoiceChipsValues,
+                                },
+                              ),
+                            }, challengesRecordReference1);
                           } else {
-                            await ChallengesRecord.collection.doc().set({
+                            var challengesRecordReference2 =
+                                ChallengesRecord.collection.doc();
+                            await challengesRecordReference2.set({
                               ...createChallengesRecordData(
                                 userRef: currentUserReference,
                                 name: _model
@@ -634,6 +683,31 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                                 },
                               ),
                             });
+                            _model.createdChallenge2 =
+                                ChallengesRecord.getDocumentFromData({
+                              ...createChallengesRecordData(
+                                userRef: currentUserReference,
+                                name: _model
+                                    .challengeNameFieldTextController.text,
+                                xpReward: _model.xpRewardDropdownValue,
+                                isActive: true,
+                                createdTime: getCurrentTimestamp,
+                                scheduledDate: getCurrentTimestamp,
+                                challengeType: _model.choiceChipsValue,
+                                completedToday: false,
+                                reminderEnabled: false,
+                                slipCount: 0,
+                                cleanStreak: 0,
+                                bestCleanStreak: 0,
+                                notificationKey: _model.notificationKey,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'repeat_days':
+                                      _model.repeatDaysChoiceChipsValues,
+                                },
+                              ),
+                            }, challengesRecordReference2);
                           }
 
                           if ((_model.reminderSwitchValue == true) &&
@@ -657,7 +731,6 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                               },
                             ),
                           });
-                          Navigator.pop(context);
 
                           await currentUserReference!.update({
                             ...mapToFirestore(
@@ -678,6 +751,7 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                               backgroundColor: Color(0xFF87E84C),
                             ),
                           );
+                          Navigator.pop(context, true);
                         } else {
                           await showDialog(
                             context: context,
@@ -734,6 +808,8 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                         },
                       );
                     }
+
+                    safeSetState(() {});
                   },
                   child: Container(
                     width: double.infinity,

@@ -300,6 +300,7 @@ class _ReminderSchedulePageWidgetState
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
+                        physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: listViewChallengesRecordList.length,
                         itemBuilder: (context, listViewIndex) {
                           final listViewChallengesRecord =

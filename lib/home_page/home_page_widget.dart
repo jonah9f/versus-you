@@ -39,9 +39,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (valueOrDefault<bool>(
-              currentUserDocument?.hasCompletedOnboarding, false) ==
-          false) {
+      if ((valueOrDefault<bool>(
+                  currentUserDocument?.hasCompletedOnboarding, false) ==
+              false) ||
+          (valueOrDefault<bool>(currentUserDocument?.premium, false) ==
+              false)) {
         if (Navigator.of(context).canPop()) {
           context.pop();
         }
@@ -294,6 +296,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             ],
                                           ),
                                         ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                            HelpOutlineWidget.routeName);
+                                      },
+                                      child: Icon(
+                                        Icons.help,
+                                        color: Colors.white,
+                                        size: 24.0,
                                       ),
                                     ),
                                   ],

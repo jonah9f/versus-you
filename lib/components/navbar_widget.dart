@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'navbar_model.dart';
 export 'navbar_model.dart';
@@ -168,6 +169,63 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                         .fontStyle,
                                   ),
                                   color: widget.selectedIndex == 1
+                                      ? Color(0xFF78E84C)
+                                      : Color(0xFFB0B0B0),
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
+                        ),
+                      ].divide(SizedBox(height: 4.0)),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(MyFuturePageWidget.routeName);
+                          },
+                          child: FaIcon(
+                            FontAwesomeIcons.feather,
+                            color: widget.selectedIndex == 4
+                                ? Color(0xFF78E84C)
+                                : Color(0xFFB0B0B0),
+                            size: 24.0,
+                          ),
+                        ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(MyFuturePageWidget.routeName);
+                          },
+                          child: Text(
+                            'My Future',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.manrope(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  color: widget.selectedIndex == 4
                                       ? Color(0xFF78E84C)
                                       : Color(0xFFB0B0B0),
                                   fontSize: 12.0,
