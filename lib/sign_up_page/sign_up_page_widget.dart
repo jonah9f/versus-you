@@ -57,7 +57,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(

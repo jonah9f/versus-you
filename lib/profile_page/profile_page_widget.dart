@@ -1,5 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -29,9 +28,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfilePageModel());
-
-    _model.switchValue =
-        valueOrDefault<bool>(currentUserDocument?.notificationsEnabled, false);
   }
 
   @override
@@ -50,7 +46,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -80,7 +76,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                           .fontStyle,
                                     ),
                                     color: Colors.white,
-                                    fontSize: 34.0,
+                                    fontSize: 28.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
                                     fontStyle: FlutterFlowTheme.of(context)
@@ -92,7 +88,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 4.0, 65.0, 0.0),
+                              0.0, 0.0, 65.0, 0.0),
                           child: Text(
                             'Build the person you said you would become.',
                             textAlign: TextAlign.start,
@@ -833,7 +829,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               4.0, 4.0, 4.0, 4.0),
                           child: Container(
                             width: double.infinity,
-                            height: 140.0,
+                            height: 90.0,
                             decoration: BoxDecoration(
                               color: Color(0xFF1C1C1C),
                               borderRadius: BorderRadius.only(
@@ -846,73 +842,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      14.0, 0.0, 14.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Icon(
-                                        Icons.notifications_sharp,
-                                        color: Color(0xFFB0B0B0),
-                                        size: 22.0,
-                                      ),
-                                      Text(
-                                        'Notifications',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.manrope(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                              color: Color(0xFFB0B0B0),
-                                              fontSize: 15.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                      ),
-                                      Spacer(),
-                                      AuthUserStreamWidget(
-                                        builder: (context) => Switch.adaptive(
-                                          value: _model.switchValue!,
-                                          onChanged: (newValue) async {
-                                            safeSetState(() =>
-                                                _model.switchValue = newValue);
-                                            if (newValue) {
-                                              await currentUserReference!
-                                                  .update(createUsersRecordData(
-                                                notificationsEnabled:
-                                                    _model.switchValue,
-                                              ));
-                                            }
-                                          },
-                                          activeColor: Color(0xFF78E84C),
-                                          activeTrackColor: Color(0xFF84E87C),
-                                          inactiveTrackColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          inactiveThumbColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                                 Container(
                                   width: double.infinity,
                                   height: 1.0,

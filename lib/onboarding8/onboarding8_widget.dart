@@ -74,7 +74,7 @@ class _Onboarding8WidgetState extends State<Onboarding8Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(

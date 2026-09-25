@@ -72,7 +72,7 @@ class _Onboarding7WidgetState extends State<Onboarding7Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(

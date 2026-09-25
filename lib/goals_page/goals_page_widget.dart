@@ -166,7 +166,7 @@ class _GoalsPageWidgetState extends State<GoalsPageWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: Color(0xFF111111),
+            backgroundColor: Colors.black,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -189,7 +189,7 @@ class _GoalsPageWidgetState extends State<GoalsPageWidget> {
           },
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: Color(0xFF111111),
+            backgroundColor: Colors.black,
             body: SafeArea(
               top: true,
               child: SingleChildScrollView(
@@ -1730,44 +1730,61 @@ class _GoalsPageWidgetState extends State<GoalsPageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 20.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    listViewChallengesRecord
-                                                        .name,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .manrope(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                Expanded(
+                                                  child: Flex(
+                                                    direction: Axis.vertical,
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    20.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          listViewChallengesRecord
+                                                              .name,
+                                                          maxLines: 4,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .manrope(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: listViewChallengesRecord
+                                                                            .challengeType ==
+                                                                        'Break a Habit'
+                                                                    ? Color(
+                                                                        0xFFFF4D4D)
+                                                                    : Color(
+                                                                        0xFF78E84C),
+                                                                fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          color: listViewChallengesRecord
-                                                                      .challengeType ==
-                                                                  'Break a Habit'
-                                                              ? Color(
-                                                                  0xFFFF4D4D)
-                                                              : Color(
-                                                                  0xFF78E84C),
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
+                                                              ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 Padding(

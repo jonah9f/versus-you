@@ -63,7 +63,7 @@ class _Onboarding6WidgetState extends State<Onboarding6Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(

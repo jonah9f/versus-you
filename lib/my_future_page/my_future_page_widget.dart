@@ -6,6 +6,7 @@ import '/components/navbar_widget.dart';
 import '/components/one_year_vision_review_sheet_widget.dart';
 import '/components/progress_review_sheet_widget.dart';
 import '/components/six_month_vision_review_sheet_widget.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -58,7 +59,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: Color(0xFF111111),
+            backgroundColor: Colors.black,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -82,7 +83,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
           },
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: Color(0xFF111111),
+            backgroundColor: Colors.black,
             body: SafeArea(
               top: true,
               child: SingleChildScrollView(
@@ -95,7 +96,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 10.0, 20.0, 28.0),
+                                20.0, 24.0, 20.0, 28.0),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -110,7 +111,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             15.0, 0.0, 0.0, 0.0),
                                         child: Text(
-                                          'MY FUTURE',
+                                          'My Future',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -122,7 +123,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF78E84C),
+                                                color: Colors.white,
                                                 fontSize: 28.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.bold,
@@ -171,7 +172,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      '6 MONTH VISION',
+                                      '6 Month Vision',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -183,7 +184,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.white,
-                                            fontSize: 21.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
@@ -202,10 +203,10 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFF1C1C1C),
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                          bottomLeft: Radius.circular(16.0),
-                                          bottomRight: Radius.circular(16.0),
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                          bottomLeft: Radius.circular(20.0),
+                                          bottomRight: Radius.circular(20.0),
                                         ),
                                       ),
                                       child: Padding(
@@ -245,8 +246,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            Color(0xFF78E84C),
+                                                        color: Colors.white,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
@@ -345,13 +345,13 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                     borderRadius:
                                                         BorderRadius.only(
                                                       topLeft:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       bottomLeft:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                     ),
                                                   ),
                                                 ),
@@ -365,7 +365,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      '1 YEAR VISION',
+                                      '1 Year Vision',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -377,7 +377,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.white,
-                                            fontSize: 21.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
@@ -396,10 +396,10 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFF1C1C1C),
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                          bottomLeft: Radius.circular(16.0),
-                                          bottomRight: Radius.circular(16.0),
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                          bottomLeft: Radius.circular(20.0),
+                                          bottomRight: Radius.circular(20.0),
                                         ),
                                       ),
                                       child: Padding(
@@ -439,8 +439,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            Color(0xFF78E84C),
+                                                        color: Colors.white,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
@@ -539,13 +538,13 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                     borderRadius:
                                                         BorderRadius.only(
                                                       topLeft:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       bottomLeft:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(16.0),
+                                                          Radius.circular(8.0),
                                                     ),
                                                   ),
                                                 ),
@@ -559,7 +558,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'CURRENT MILESTONES',
+                                      'Current Milestones',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -571,7 +570,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.white,
-                                            fontSize: 21.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
@@ -590,10 +589,10 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFF1C1C1C),
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                          bottomLeft: Radius.circular(16.0),
-                                          bottomRight: Radius.circular(16.0),
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                          bottomLeft: Radius.circular(20.0),
+                                          bottomRight: Radius.circular(20.0),
                                         ),
                                       ),
                                       child: SingleChildScrollView(
@@ -672,8 +671,8 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                           Icon(
                                                                         Icons
                                                                             .check_box_outline_blank,
-                                                                        color: Color(
-                                                                            0xFF78E84C),
+                                                                        color: Colors
+                                                                            .white,
                                                                         size:
                                                                             24.0,
                                                                       ),
@@ -692,8 +691,8 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                     child: Icon(
                                                                       Icons
                                                                           .check_box_outlined,
-                                                                      color: Color(
-                                                                          0xFF78E84C),
+                                                                      color: Colors
+                                                                          .white,
                                                                       size:
                                                                           24.0,
                                                                     ),
@@ -724,8 +723,8 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                             .bodyMedium
                                                                             .fontStyle,
                                                                       ),
-                                                                      color: Color(
-                                                                          0xFF78E84C),
+                                                                      color: Colors
+                                                                          .white,
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight: FlutterFlowTheme.of(
@@ -801,8 +800,8 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                 child: FaIcon(
                                                                   FontAwesomeIcons
                                                                       .ellipsisV,
-                                                                  color: Color(
-                                                                      0xFF78E84C),
+                                                                  color: Colors
+                                                                      .white,
                                                                   size: 24.0,
                                                                 ),
                                                               ),
@@ -817,7 +816,51 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                             ),
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  (FFCrossAxisAlignment.start)
+                                                      .flutterValue,
+                                              textBaseline:
+                                                  TextBaseline.alphabetic,
                                               children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(15.0, 10.0,
+                                                          10.0, 10.0),
+                                                  child: Text(
+                                                    '',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .manrope(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                          lineHeight: 1.45,
+                                                        ),
+                                                  ),
+                                                ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -945,7 +988,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'PROGRESS REVIEW',
+                                      'Progress Review',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -957,7 +1000,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                       .fontStyle,
                                             ),
                                             color: Colors.white,
-                                            fontSize: 21.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
@@ -976,10 +1019,10 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFF1C1C1C),
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                          bottomLeft: Radius.circular(16.0),
-                                          bottomRight: Radius.circular(16.0),
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                          bottomLeft: Radius.circular(20.0),
+                                          bottomRight: Radius.circular(20.0),
                                         ),
                                       ),
                                       child: Column(
@@ -1066,13 +1109,13 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                   borderRadius:
                                                       BorderRadius.only(
                                                     topLeft:
-                                                        Radius.circular(16.0),
+                                                        Radius.circular(8.0),
                                                     topRight:
-                                                        Radius.circular(16.0),
+                                                        Radius.circular(8.0),
                                                     bottomLeft:
-                                                        Radius.circular(16.0),
+                                                        Radius.circular(8.0),
                                                     bottomRight:
-                                                        Radius.circular(16.0),
+                                                        Radius.circular(8.0),
                                                   ),
                                                 ),
                                               ),
@@ -1093,7 +1136,7 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF78E84C),
+                                                    color: Colors.white,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle:

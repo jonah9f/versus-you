@@ -73,7 +73,7 @@ class _Onboarding11WidgetState extends State<Onboarding11Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(
@@ -213,7 +213,7 @@ class _Onboarding11WidgetState extends State<Onboarding11Widget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF78E84C),
+                                    color: Color(0xFFB0B0B0),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
@@ -281,7 +281,7 @@ class _Onboarding11WidgetState extends State<Onboarding11Widget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF78E84C),
+                                    color: Color(0xFFB0B0B0),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
@@ -350,7 +350,7 @@ class _Onboarding11WidgetState extends State<Onboarding11Widget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF78E84C),
+                                    color: Color(0xFFB0B0B0),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
@@ -419,7 +419,7 @@ class _Onboarding11WidgetState extends State<Onboarding11Widget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF78E84C),
+                                    color: Color(0xFFB0B0B0),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)

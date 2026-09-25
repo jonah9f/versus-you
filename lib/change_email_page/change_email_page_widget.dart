@@ -48,7 +48,7 @@ class _ChangeEmailPageWidgetState extends State<ChangeEmailPageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF111111),
+        backgroundColor: Colors.black,
         body: SafeArea(
           top: true,
           child: Padding(

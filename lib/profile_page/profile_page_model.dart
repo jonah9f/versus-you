@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for Switch widget.
-  bool? switchValue;
   // Model for navbar component.
   late NavbarModel navbarModel;
 
