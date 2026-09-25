@@ -7529,10 +7529,10 @@ class _Onboarding14WidgetState extends State<Onboarding14Widget> {
                                                       level: 1,
                                                       disciplineScore: 500,
                                                       weeklyGoal: 48,
-                                                      notificationsEnabled:
-                                                          true,
                                                       totalXp: 0,
                                                       xp: 0,
+                                                      notificationsEnabled:
+                                                          true,
                                                     ));
 
                                                     context.goNamed(

@@ -717,7 +717,7 @@ class _AddChallengeSheetWidgetState extends State<AddChallengeSheetWidget> {
                                   true)) {
                             await actions.scheduleChallengeReminders(
                               _model.challengeNameFieldTextController.text,
-                              _model.datePicked!,
+                              _model.selectedReminderTime!,
                               _model.repeatDaysChoiceChipsValues!.toList(),
                               _model.notificationKey,
                               _model.choiceChipsValue!,

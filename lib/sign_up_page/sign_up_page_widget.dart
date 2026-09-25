@@ -701,20 +701,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     .update(createUsersRecordData(
                                       displayName: _model
                                           .signUpNameFieldTextController.text,
-                                      level: 1,
-                                      xp: 0,
-                                      totalXp: 0,
                                       currentStreak: 0,
                                       bestStreak: 0,
-                                      disciplineScore: 500,
                                       premium: false,
                                       createdTime: getCurrentTimestamp,
                                       monthlyStatsMonth: getCurrentTimestamp,
                                       monthlyChallengesCompleted: 0,
                                       monthlyHoursFocused: 0.0,
                                       monthlyAverageSleep: 0.0,
-                                      weeklyGoal: 150,
-                                      hasCompletedOnboarding: false,
                                     ));
 
                                 context.goNamedAuth(
