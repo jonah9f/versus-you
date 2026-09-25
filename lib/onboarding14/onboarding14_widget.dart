@@ -7526,6 +7526,13 @@ class _Onboarding14WidgetState extends State<Onboarding14Widget> {
                                                               1),
                                                       hasCompletedOnboarding:
                                                           true,
+                                                      level: 1,
+                                                      disciplineScore: 500,
+                                                      weeklyGoal: 48,
+                                                      notificationsEnabled:
+                                                          true,
+                                                      totalXp: 0,
+                                                      xp: 0,
                                                     ));
 
                                                     context.goNamed(
