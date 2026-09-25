@@ -222,6 +222,7 @@ class _AddMilestoneSheetWidgetState extends State<AddMilestoneSheetWidget> {
                           createdTime: getCurrentTimestamp,
                           isCompleted: false,
                         ));
+                    Navigator.pop(context);
                   },
                   child: Container(
                     width: 314.78,
