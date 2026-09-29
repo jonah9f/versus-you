@@ -97,7 +97,19 @@ Future scheduleChallengeReminders(
       'Sun': DateTime.sunday,
     };
 
-    for (final dayName in repeatDays) {
+    final normalizedRepeatDays = repeatDays.contains('Everyday')
+        ? <String>[
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ]
+        : repeatDays;
+
+    for (final dayName in normalizedRepeatDays) {
       final weekday = weekdayMap[dayName];
       print('REMINDER: timezone=${localTimezone.identifier}');
 
