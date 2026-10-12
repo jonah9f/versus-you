@@ -16,3 +16,5 @@ export '/custom_code/actions/schedule_missed_day_reminders.dart'
     show scheduleMissedDayReminders;
 export '/custom_code/actions/reset_missed_day_reminders.dart'
     show resetMissedDayReminders;
+export '/custom_code/actions/open_promo_code_redemption.dart'
+    show openPromoCodeRedemption;
