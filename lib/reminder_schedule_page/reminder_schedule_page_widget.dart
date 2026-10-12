@@ -355,7 +355,10 @@ class _ReminderSchedulePageWidgetState
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     FaIcon(
-                                      FontAwesomeIcons.solidBell,
+                                      FaIconData(const IconData(
+                                          /* solidBell */ 0xf0f3,
+                                          fontFamily: 'FontAwesomeSolid',
+                                          fontPackage: 'font_awesome_flutter')),
                                       color: Color(0xFF78E84C),
                                       size: 20.0,
                                     ),

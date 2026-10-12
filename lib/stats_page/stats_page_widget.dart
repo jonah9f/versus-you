@@ -1074,7 +1074,11 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: FaIcon(
-                                          FontAwesomeIcons.trophy,
+                                          FaIconData(const IconData(
+                                              /* trophy */ 0xf091,
+                                              fontFamily: 'FontAwesomeSolid',
+                                              fontPackage:
+                                                  'font_awesome_flutter')),
                                           color: Color(0xFF78E84C),
                                           size: 34.0,
                                         ),
@@ -1890,7 +1894,12 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: FaIcon(
-                                                FontAwesomeIcons.trophy,
+                                                FaIconData(const IconData(
+                                                    /* trophy */ 0xf091,
+                                                    fontFamily:
+                                                        'FontAwesomeSolid',
+                                                    fontPackage:
+                                                        'font_awesome_flutter')),
                                                 color: Color(0xFF78E84C),
                                                 size: 24.0,
                                               ),
@@ -2028,7 +2037,12 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: FaIcon(
-                                                FontAwesomeIcons.bolt,
+                                                FaIconData(const IconData(
+                                                    /* bolt */ 0xf0e7,
+                                                    fontFamily:
+                                                        'FontAwesomeSolid',
+                                                    fontPackage:
+                                                        'font_awesome_flutter')),
                                                 color: Color(0xFF78E84C),
                                                 size: 24.0,
                                               ),
@@ -2248,7 +2262,11 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: FaIcon(
-                                            FontAwesomeIcons.trophy,
+                                            FaIconData(const IconData(
+                                                /* trophy */ 0xf091,
+                                                fontFamily: 'FontAwesomeSolid',
+                                                fontPackage:
+                                                    'font_awesome_flutter')),
                                             color: Color(0xFF78E84C),
                                             size: 24.0,
                                           ),
@@ -2362,7 +2380,11 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: FaIcon(
-                                          FontAwesomeIcons.rocket,
+                                          FaIconData(const IconData(
+                                              /* rocket */ 0xf135,
+                                              fontFamily: 'FontAwesomeSolid',
+                                              fontPackage:
+                                                  'font_awesome_flutter')),
                                           color: Color(0xFF78E84C),
                                           size: 24.0,
                                         ),
@@ -2923,7 +2945,12 @@ class _StatsPageWidgetState extends State<StatsPageWidget> {
                                                   ),
                                                 ),
                                                 FaIcon(
-                                                  FontAwesomeIcons.trophy,
+                                                  FaIconData(const IconData(
+                                                      /* trophy */ 0xf091,
+                                                      fontFamily:
+                                                          'FontAwesomeSolid',
+                                                      fontPackage:
+                                                          'font_awesome_flutter')),
                                                   color: Color(0xFF84E87C),
                                                   size: 21.0,
                                                 ),

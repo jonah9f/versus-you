@@ -1009,7 +1009,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 20.0, 0.0, 20.0),
                                           child: FaIcon(
-                                            FontAwesomeIcons.bullseye,
+                                            FaIconData(const IconData(
+                                                /* bullseye */ 0xf140,
+                                                fontFamily: 'FontAwesomeSolid',
+                                                fontPackage:
+                                                    'font_awesome_flutter')),
                                             color: Color(0xFF78E84C),
                                             size: 24.0,
                                           ),

@@ -493,7 +493,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '\$4.99 ',
+                                '\$6.99 ',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

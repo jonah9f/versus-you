@@ -109,8 +109,7 @@ class DailyProgressRecord extends FirestoreRecord {
 
   @override
   bool operator ==(other) =>
-      other is DailyProgressRecord &&
-      reference.path.hashCode == other.reference.path.hashCode;
+      other is DailyProgressRecord && reference.path == other.reference.path;
 }
 
 Map<String, dynamic> createDailyProgressRecordData({

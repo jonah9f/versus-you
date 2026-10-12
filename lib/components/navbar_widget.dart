@@ -197,7 +197,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                             context.pushNamed(MyFuturePageWidget.routeName);
                           },
                           child: FaIcon(
-                            FontAwesomeIcons.feather,
+                            FaIconData(const IconData(/* feather */ 0xf52d,
+                                fontFamily: 'FontAwesomeSolid',
+                                fontPackage: 'font_awesome_flutter')),
                             color: widget.selectedIndex == 4
                                 ? Color(0xFF78E84C)
                                 : Color(0xFFB0B0B0),

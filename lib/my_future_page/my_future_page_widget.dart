@@ -798,8 +798,12 @@ class _MyFuturePageWidgetState extends State<MyFuturePageWidget> {
                                                                           () {}));
                                                                 },
                                                                 child: FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .ellipsisV,
+                                                                  FaIconData(const IconData(
+                                                                      /* ellipsisV */ 0xf142,
+                                                                      fontFamily:
+                                                                          'FontAwesomeSolid',
+                                                                      fontPackage:
+                                                                          'font_awesome_flutter')),
                                                                   color: Colors
                                                                       .white,
                                                                   size: 24.0,

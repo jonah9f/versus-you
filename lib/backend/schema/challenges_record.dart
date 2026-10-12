@@ -181,8 +181,7 @@ class ChallengesRecord extends FirestoreRecord {
 
   @override
   bool operator ==(other) =>
-      other is ChallengesRecord &&
-      reference.path.hashCode == other.reference.path.hashCode;
+      other is ChallengesRecord && reference.path == other.reference.path;
 }
 
 Map<String, dynamic> createChallengesRecordData({
@@ -275,7 +274,7 @@ class ChallengesRecordDocumentEquality implements Equality<ChallengesRecord> {
         e?.isActive,
         e?.reminderTime,
         e?.createdTime,
-        e?.repeatDays,
+        const ListEquality().hash(e?.repeatDays),
         e?.email,
         e?.displayName,
         e?.photoUrl,
