@@ -39,6 +39,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.initializeTikTokSDK(
+        'TTD36cmc6QreVA5SnKeDj3vr5GnBvAfD',
+        '6802104348',
+        '7698263063429955592',
+      );
       if ((valueOrDefault<bool>(
                   currentUserDocument?.hasCompletedOnboarding, false) ==
               false) ||

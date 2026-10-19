@@ -18,3 +18,5 @@ export '/custom_code/actions/reset_missed_day_reminders.dart'
     show resetMissedDayReminders;
 export '/custom_code/actions/open_promo_code_redemption.dart'
     show openPromoCodeRedemption;
+export '/custom_code/actions/initialize_tik_tok_s_d_k.dart'
+    show initializeTikTokSDK;

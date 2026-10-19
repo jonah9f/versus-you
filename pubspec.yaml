@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.4+24
+version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -115,6 +115,7 @@ dependencies:
   sqflite_common: 2.5.4+3
   stop_watch_timer: 3.0.2
   stream_transform: 2.1.0
+  tiktok_business_sdk: ^0.0.1
   timeago: 3.7.1
   timezone: 0.10.1
   url_launcher: 6.3.1
