@@ -23,8 +23,12 @@ Future initializeTikTokSDK(
       accessToken: accessToken,
       appId: appId,
       ttAppId: ttAppId,
-      openDebug: false,
+      openDebug: true,
       enableAutoIapTrack: false,
+    );
+
+    await tiktokSdk.trackTTEvent(
+      event: EventName.completeTutorial,
     );
 
     print('TikTok SDK initialization completed');
