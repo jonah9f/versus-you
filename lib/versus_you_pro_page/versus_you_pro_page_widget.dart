@@ -654,7 +654,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                             ParamType.String,
                           ),
                           'commitmentLevel': serializeParam(
-                            widget.commitmentLevel,
+                            _model.selectedCommitment,
                             ParamType.String,
                           ),
                           'disciplineSelected': serializeParam(

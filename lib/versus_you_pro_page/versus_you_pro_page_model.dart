@@ -4,6 +4,18 @@ import 'versus_you_pro_page_widget.dart' show VersusYouProPageWidget;
 import 'package:flutter/material.dart';
 
 class VersusYouProPageModel extends FlutterFlowModel<VersusYouProPageWidget> {
+  ///  Local state fields for this page.
+
+  String? selectedCommitment;
+
+  bool lightSelected = false;
+
+  bool moderateSelected = false;
+
+  bool seriousSelected = false;
+
+  bool allSelected = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [RevenueCat - Purchase] action in Container widget.

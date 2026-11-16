@@ -8,13 +8,13 @@ class Onboarding13Model extends FlutterFlowModel<Onboarding13Widget> {
 
   String? selectedCommitment;
 
-  bool lightSelected = false;
-
   bool moderateSelected = false;
 
   bool seriousSelected = false;
 
   bool allSelected = false;
+
+  bool lightSelected = false;
 
   @override
   void initState(BuildContext context) {}
