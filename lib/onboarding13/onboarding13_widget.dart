@@ -412,7 +412,73 @@ class _Onboarding13WidgetState extends State<Onboarding13Widget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.goNamed(VersusYouProPageWidget.routeName);
+                          context.goNamed(
+                            VersusYouProPageWidget.routeName,
+                            queryParameters: {
+                              'primaryGoal': serializeParam(
+                                widget.primaryGoal,
+                                ParamType.String,
+                              ),
+                              'selectedSecondaryGoals': serializeParam(
+                                widget.selectedSecondaryGoals,
+                                ParamType.String,
+                                isList: true,
+                              ),
+                              'selectedObstacles': serializeParam(
+                                widget.selectedObstacles,
+                                ParamType.String,
+                                isList: true,
+                              ),
+                              'sixMonthVision': serializeParam(
+                                widget.sixMonthVision,
+                                ParamType.String,
+                              ),
+                              'oneYearVision': serializeParam(
+                                widget.oneYearVision,
+                                ParamType.String,
+                              ),
+                              'fiveYearVision': serializeParam(
+                                widget.fiveYearVision,
+                                ParamType.String,
+                              ),
+                              'energyTime': serializeParam(
+                                widget.energyTime,
+                                ParamType.String,
+                              ),
+                              'consistencyLevel': serializeParam(
+                                widget.consistencyLevel,
+                                ParamType.String,
+                              ),
+                              'commitmentLevel': serializeParam(
+                                _model.selectedCommitment,
+                                ParamType.String,
+                              ),
+                              'disciplineSelected': serializeParam(
+                                widget.disciplineSelected,
+                                ParamType.bool,
+                              ),
+                              'fitnessSelected': serializeParam(
+                                widget.fitnessSelected,
+                                ParamType.bool,
+                              ),
+                              'careerSelected': serializeParam(
+                                widget.careerSelected,
+                                ParamType.bool,
+                              ),
+                              'confidenceSelected': serializeParam(
+                                widget.confidenceSelected,
+                                ParamType.bool,
+                              ),
+                              'sleepSelected': serializeParam(
+                                widget.sleepSelected,
+                                ParamType.bool,
+                              ),
+                              'mentalPerformanceSelected': serializeParam(
+                                widget.mentalPerformanceSelected,
+                                ParamType.bool,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         text: 'SEE MY PLAN →',
                         options: FFButtonOptions(
