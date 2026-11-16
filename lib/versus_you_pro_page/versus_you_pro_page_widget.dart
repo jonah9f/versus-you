@@ -613,9 +613,7 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                       await currentUserReference!.update(createUsersRecordData(
                         premium: true,
                       ));
-                      if (Navigator.of(context).canPop()) {
-                        context.pop();
-                      }
+
                       context.pushNamed(
                         Onboarding14Widget.routeName,
                         queryParameters: {
