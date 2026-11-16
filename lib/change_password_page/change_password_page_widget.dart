@@ -250,7 +250,9 @@ class _ChangePasswordPageWidgetState extends State<ChangePasswordPageWidget> {
                                         _model.newPasswordVisibility =
                                             !_model.newPasswordVisibility);
                                   },
-                                  focusNode: FocusNode(skipTraversal: true),
+                                  focusNode: _model
+                                      .newPasswordPasswordVisibilityFocusNode
+                                    ..skipTraversal = !(false),
                                   child: Icon(
                                     _model.newPasswordVisibility
                                         ? Icons.visibility_outlined
@@ -394,7 +396,9 @@ class _ChangePasswordPageWidgetState extends State<ChangePasswordPageWidget> {
                                         _model.updatePasswordVisibility =
                                             !_model.updatePasswordVisibility);
                                   },
-                                  focusNode: FocusNode(skipTraversal: true),
+                                  focusNode: _model
+                                      .updatePasswordPasswordVisibilityFocusNode
+                                    ..skipTraversal = !(false),
                                   child: Icon(
                                     _model.updatePasswordVisibility
                                         ? Icons.visibility_outlined

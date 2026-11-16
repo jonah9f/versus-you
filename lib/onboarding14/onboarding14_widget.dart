@@ -7409,7 +7409,7 @@ class _Onboarding14WidgetState extends State<Onboarding14Widget> {
                                                       ));
 
                                                       context.goNamed(
-                                                          VersusYouProPageWidget
+                                                          HomePageWidget
                                                               .routeName);
                                                     } else {
                                                       ScaffoldMessenger.of(

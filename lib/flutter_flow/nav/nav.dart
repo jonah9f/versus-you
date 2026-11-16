@@ -142,7 +142,70 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: VersusYouProPageWidget.routeName,
           path: VersusYouProPageWidget.routePath,
-          builder: (context, params) => VersusYouProPageWidget(),
+          builder: (context, params) => VersusYouProPageWidget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            consistencyLevel: params.getParam(
+              'consistencyLevel',
+              ParamType.String,
+            ),
+            commitmentLevel: params.getParam(
+              'commitmentLevel',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: HelpOutlineWidget.routeName,
@@ -719,6 +782,74 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'MyFuturePage')
               : MyFuturePageWidget(),
+        ),
+        FFRoute(
+          name: Onboarding125Widget.routeName,
+          path: Onboarding125Widget.routePath,
+          builder: (context, params) => Onboarding125Widget(
+            primaryGoal: params.getParam(
+              'primaryGoal',
+              ParamType.String,
+            ),
+            selectedSecondaryGoals: params.getParam<String>(
+              'selectedSecondaryGoals',
+              ParamType.String,
+              isList: true,
+            ),
+            selectedObstacles: params.getParam<String>(
+              'selectedObstacles',
+              ParamType.String,
+              isList: true,
+            ),
+            sixMonthVision: params.getParam(
+              'sixMonthVision',
+              ParamType.String,
+            ),
+            oneYearVision: params.getParam(
+              'oneYearVision',
+              ParamType.String,
+            ),
+            fiveYearVision: params.getParam(
+              'fiveYearVision',
+              ParamType.String,
+            ),
+            energyTime: params.getParam(
+              'energyTime',
+              ParamType.String,
+            ),
+            consistencyLevel: params.getParam(
+              'consistencyLevel',
+              ParamType.String,
+            ),
+            disciplineSelected: params.getParam(
+              'disciplineSelected',
+              ParamType.bool,
+            ),
+            fitnessSelected: params.getParam(
+              'fitnessSelected',
+              ParamType.bool,
+            ),
+            careerSelected: params.getParam(
+              'careerSelected',
+              ParamType.bool,
+            ),
+            confidenceSelected: params.getParam(
+              'confidenceSelected',
+              ParamType.bool,
+            ),
+            sleepSelected: params.getParam(
+              'sleepSelected',
+              ParamType.bool,
+            ),
+            mentalPerformanceSelected: params.getParam(
+              'mentalPerformanceSelected',
+              ParamType.bool,
+            ),
+            commitmentLevel: params.getParam(
+              'commitmentLevel',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -40,3 +40,4 @@ export '/onboarding12/onboarding12_widget.dart' show Onboarding12Widget;
 export '/onboarding13/onboarding13_widget.dart' show Onboarding13Widget;
 export '/onboarding14/onboarding14_widget.dart' show Onboarding14Widget;
 export '/my_future_page/my_future_page_widget.dart' show MyFuturePageWidget;
+export '/onboarding125/onboarding125_widget.dart' show Onboarding125Widget;

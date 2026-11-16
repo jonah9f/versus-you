@@ -11,7 +11,40 @@ import 'versus_you_pro_page_model.dart';
 export 'versus_you_pro_page_model.dart';
 
 class VersusYouProPageWidget extends StatefulWidget {
-  const VersusYouProPageWidget({super.key});
+  const VersusYouProPageWidget({
+    super.key,
+    this.primaryGoal,
+    this.selectedSecondaryGoals,
+    this.selectedObstacles,
+    this.sixMonthVision,
+    this.oneYearVision,
+    this.fiveYearVision,
+    this.energyTime,
+    this.consistencyLevel,
+    this.commitmentLevel,
+    this.disciplineSelected,
+    this.fitnessSelected,
+    this.careerSelected,
+    this.confidenceSelected,
+    this.sleepSelected,
+    this.mentalPerformanceSelected,
+  });
+
+  final String? primaryGoal;
+  final List<String>? selectedSecondaryGoals;
+  final List<String>? selectedObstacles;
+  final String? sixMonthVision;
+  final String? oneYearVision;
+  final String? fiveYearVision;
+  final String? energyTime;
+  final String? consistencyLevel;
+  final String? commitmentLevel;
+  final bool? disciplineSelected;
+  final bool? fitnessSelected;
+  final bool? careerSelected;
+  final bool? confidenceSelected;
+  final bool? sleepSelected;
+  final bool? mentalPerformanceSelected;
 
   static String routeName = 'VersusYouProPage';
   static String routePath = '/versusYouProPage';
@@ -583,7 +616,73 @@ class _VersusYouProPageWidgetState extends State<VersusYouProPageWidget> {
                       if (Navigator.of(context).canPop()) {
                         context.pop();
                       }
-                      context.pushNamed(HomePageWidget.routeName);
+                      context.pushNamed(
+                        Onboarding14Widget.routeName,
+                        queryParameters: {
+                          'primaryGoal': serializeParam(
+                            widget.primaryGoal,
+                            ParamType.String,
+                          ),
+                          'selectedSecondaryGoals': serializeParam(
+                            widget.selectedSecondaryGoals,
+                            ParamType.String,
+                            isList: true,
+                          ),
+                          'selectedObstacles': serializeParam(
+                            widget.selectedObstacles,
+                            ParamType.String,
+                            isList: true,
+                          ),
+                          'sixMonthVision': serializeParam(
+                            widget.sixMonthVision,
+                            ParamType.String,
+                          ),
+                          'oneYearVision': serializeParam(
+                            widget.oneYearVision,
+                            ParamType.String,
+                          ),
+                          'fiveYearVision': serializeParam(
+                            widget.fiveYearVision,
+                            ParamType.String,
+                          ),
+                          'energyTime': serializeParam(
+                            widget.energyTime,
+                            ParamType.String,
+                          ),
+                          'consistencyLevel': serializeParam(
+                            widget.consistencyLevel,
+                            ParamType.String,
+                          ),
+                          'commitmentLevel': serializeParam(
+                            widget.commitmentLevel,
+                            ParamType.String,
+                          ),
+                          'disciplineSelected': serializeParam(
+                            widget.disciplineSelected,
+                            ParamType.bool,
+                          ),
+                          'fitnessSelected': serializeParam(
+                            widget.fitnessSelected,
+                            ParamType.bool,
+                          ),
+                          'careerSelected': serializeParam(
+                            widget.careerSelected,
+                            ParamType.bool,
+                          ),
+                          'confidenceSelected': serializeParam(
+                            widget.confidenceSelected,
+                            ParamType.bool,
+                          ),
+                          'sleepSelected': serializeParam(
+                            widget.sleepSelected,
+                            ParamType.bool,
+                          ),
+                          'mentalPerformanceSelected': serializeParam(
+                            widget.mentalPerformanceSelected,
+                            ParamType.bool,
+                          ),
+                        }.withoutNulls,
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

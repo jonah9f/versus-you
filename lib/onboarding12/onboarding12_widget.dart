@@ -443,8 +443,32 @@ class _Onboarding12WidgetState extends State<Onboarding12Widget> {
                       if (_model.selectedCommitment != null &&
                           _model.selectedCommitment != '') {
                         context.pushNamed(
-                          Onboarding13Widget.routeName,
+                          Onboarding125Widget.routeName,
                           queryParameters: {
+                            'disciplineSelected': serializeParam(
+                              widget.disciplineSelected,
+                              ParamType.bool,
+                            ),
+                            'fitnessSelected': serializeParam(
+                              widget.fitnessSelected,
+                              ParamType.bool,
+                            ),
+                            'careerSelected': serializeParam(
+                              widget.careerSelected,
+                              ParamType.bool,
+                            ),
+                            'confidenceSelected': serializeParam(
+                              widget.confidenceSelected,
+                              ParamType.bool,
+                            ),
+                            'sleepSelected': serializeParam(
+                              widget.sleepSelected,
+                              ParamType.bool,
+                            ),
+                            'mentalPerformanceSelected': serializeParam(
+                              widget.mentalPerformanceSelected,
+                              ParamType.bool,
+                            ),
                             'primaryGoal': serializeParam(
                               widget.primaryGoal,
                               ParamType.String,
@@ -482,30 +506,6 @@ class _Onboarding12WidgetState extends State<Onboarding12Widget> {
                             'commitmentLevel': serializeParam(
                               _model.selectedCommitment,
                               ParamType.String,
-                            ),
-                            'disciplineSelected': serializeParam(
-                              widget.disciplineSelected,
-                              ParamType.bool,
-                            ),
-                            'fitnessSelected': serializeParam(
-                              widget.fitnessSelected,
-                              ParamType.bool,
-                            ),
-                            'careerSelected': serializeParam(
-                              widget.careerSelected,
-                              ParamType.bool,
-                            ),
-                            'confidenceSelected': serializeParam(
-                              widget.confidenceSelected,
-                              ParamType.bool,
-                            ),
-                            'sleepSelected': serializeParam(
-                              widget.sleepSelected,
-                              ParamType.bool,
-                            ),
-                            'mentalPerformanceSelected': serializeParam(
-                              widget.mentalPerformanceSelected,
-                              ParamType.bool,
                             ),
                           }.withoutNulls,
                         );

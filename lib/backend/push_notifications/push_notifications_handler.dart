@@ -124,7 +124,24 @@ final parametersBuilderMap =
   'ReminderSchedulePage': ParameterData.none(),
   'ScreenTimeGoalPage': ParameterData.none(),
   'AppearancePage': ParameterData.none(),
-  'VersusYouProPage': ParameterData.none(),
+  'VersusYouProPage': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'consistencyLevel': getParameter<String>(data, 'consistencyLevel'),
+          'commitmentLevel': getParameter<String>(data, 'commitmentLevel'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+        },
+      ),
   'HelpOutline': ParameterData.none(),
   'FeedbackPage': ParameterData.none(),
   'TermsPrivacyPage': ParameterData.none(),
@@ -278,6 +295,24 @@ final parametersBuilderMap =
         },
       ),
   'MyFuturePage': ParameterData.none(),
+  'Onboarding125': (data) async => ParameterData(
+        allParams: {
+          'primaryGoal': getParameter<String>(data, 'primaryGoal'),
+          'sixMonthVision': getParameter<String>(data, 'sixMonthVision'),
+          'oneYearVision': getParameter<String>(data, 'oneYearVision'),
+          'fiveYearVision': getParameter<String>(data, 'fiveYearVision'),
+          'energyTime': getParameter<String>(data, 'energyTime'),
+          'consistencyLevel': getParameter<String>(data, 'consistencyLevel'),
+          'disciplineSelected': getParameter<bool>(data, 'disciplineSelected'),
+          'fitnessSelected': getParameter<bool>(data, 'fitnessSelected'),
+          'careerSelected': getParameter<bool>(data, 'careerSelected'),
+          'confidenceSelected': getParameter<bool>(data, 'confidenceSelected'),
+          'sleepSelected': getParameter<bool>(data, 'sleepSelected'),
+          'mentalPerformanceSelected':
+              getParameter<bool>(data, 'mentalPerformanceSelected'),
+          'commitmentLevel': getParameter<String>(data, 'commitmentLevel'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

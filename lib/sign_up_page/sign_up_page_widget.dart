@@ -483,7 +483,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                           !_model
                                               .signUpPasswordFieldVisibility);
                                     },
-                                    focusNode: FocusNode(skipTraversal: true),
+                                    focusNode: _model
+                                        .signUpPasswordFieldPasswordVisibilityFocusNode
+                                      ..skipTraversal = !(false),
                                     child: Icon(
                                       _model.signUpPasswordFieldVisibility
                                           ? Icons.visibility_outlined
@@ -622,7 +624,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                           !_model
                                               .signUpConfirmPasswordFieldVisibility);
                                     },
-                                    focusNode: FocusNode(skipTraversal: true),
+                                    focusNode: _model
+                                        .signUpConfirmPasswordFieldPasswordVisibilityFocusNode
+                                      ..skipTraversal = !(false),
                                     child: Icon(
                                       _model.signUpConfirmPasswordFieldVisibility
                                           ? Icons.visibility_outlined
