@@ -450,7 +450,7 @@ class _Onboarding13WidgetState extends State<Onboarding13Widget> {
                                 ParamType.String,
                               ),
                               'commitmentLevel': serializeParam(
-                                _model.selectedCommitment,
+                                widget.commitmentLevel,
                                 ParamType.String,
                               ),
                               'disciplineSelected': serializeParam(
